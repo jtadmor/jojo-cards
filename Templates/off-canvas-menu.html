@@ -1,0 +1,100 @@
+<template name-"off_canvas_menu">
+	<div class="off-canvas-wrap" data-offcanvas>	
+			<div class="inner-wrap">
+				<nav class="tab-bar">
+					<section class="left-small" id="left-off-canvas-toggler">
+						<a href="#"  class="left-off-canvas-toggle menu-icon"><span></span></a>
+					</section>
+					
+					<section class="middle tab-bar-section" id="sandboxTitle">
+						<h1 class="name">Inspirational Quotes</h1>
+					</section>
+						
+					<section class="right-small">
+						<a href="#" class="right-off-canvas-toggle menu-icon"><span></span></a>
+					</section>
+				</nav>
+	
+				<aside class="left-off-canvas-menu" id="entryMenu-offCanvas">
+					<ul class="off-canvas-list" >
+						<li><label id="offCanvas-categoryLabel">Inspiritational Quotes</label></li>
+						<li><a href="#" id="showAll">Show All</a></li>
+						<li><a href="#" id="shuffle">Shuffle</a></li>
+						<li><a href="#" id="createNewEntry">Enter New</a></li>
+					</ul>
+				</aside>
+	
+				<aside class="right-off-canvas-menu" id="categMenu-offCanvas">
+					<ul class="off-canvas-list">
+						<li><label>Play with JoJos</label></li>
+						<li><a href="#" id="newCategory">Createa a JoJo</a></li>
+						<li class="has-submenu"><a href="#" id="changeCategory">Change JoJos</a>
+							<ul class="right-submenu">
+								<li class="back"><a href="#">Back</a></li>
+				                <li><label>Your JoJos</label></li>
+				                {{> select_jojo_submenu}}
+				            </ul></li>
+					</ul>
+				</aside>
+				
+			
+				<!-- Page content goes here -->
+				<section class="main-section" id="mainContainer">
+					
+					<div class="row">
+						<div class = "formContainer small-12 medium-8 medium-centered large-6 large-centered columns">
+							
+					<!-- The entry form -->
+							<form id="entryForm" class="entryForm" data-abide>
+								<fieldset>
+									<legend>Enter a New Quotation</legend>
+									<div>
+										<label>Author<input name = "Author" type="text"></label>
+									</div>
+									<div>
+										<label>Quotation <small>required</small><textarea name = "Quotation" type="text" required></textarea></label>
+										<small class="error">Please enter a quote</small>
+									</div>
+									<div>
+										<label>Source<input name = "Source" type="text"></label>
+									</div>
+									<button id="submitEntry" class = "btn" type="submit" value="submit">Submit</button>
+								</fieldset>
+							</form>
+						</div>
+					<!-- Buttons / options for new jojos -->
+	
+						<div class= "formMakerButtons">	
+							<div class="row">
+								<div class="small-6 small-centered medium-4 medium-centered large-3 large-centered columns">
+									<label >What shall we call this jojo?<input id="jojoTitleInput" type="text" placeholder="get creative, be concise"></label>
+								</div>
+								
+								<div class="small-6 small-centered columns">
+									<button href="#" id="makeFormButton" data-reveal-id="formMakerModal">make your form!</button>
+								</div>
+													
+								<div class="small-6 small-centered medium-4 medium-centered large-3 large-centered columns">
+									<button href="#" id = "styleEntryButton" data-reveal-id="entryStyleModal">style your entries!</button>
+								</div>
+	
+								<div class="small-6 small-centered medium-4 medium-centered large-3 large-centered columns">
+									<button href="#" id="customizeJoJoButton">customize your JoJo!</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+				</section>
+		
+				<a class="exit-off-canvas"></a>
+			</div>
+		</div>
+</template>
+
+
+<template name = "select_jojo_submenu">
+	{{#each jojos}}
+		<li><a href="#" id="{{@key}}Select">{{this.name}}</a></li>
+	{{/each}}
+</template>
