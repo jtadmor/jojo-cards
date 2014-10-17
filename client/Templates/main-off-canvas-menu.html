@@ -7,7 +7,8 @@
 					</section>
 					
 					<section class="middle tab-bar-section" id="sandboxTitle">
-						<h1 class="name">Inspirational Quotes</h1>
+						<h1 class="name">{{currentJoJo}}</h1>
+						<p><em>by <strong>{{user}}</strong></em></p>
 					</section>
 						
 					<section class="right-small">
@@ -17,23 +18,28 @@
 	
 				<aside class="left-off-canvas-menu" id="entryMenu-offCanvas">
 					<ul class="off-canvas-list" >
-						<li><label id="offCanvas-categoryLabel">Inspiritational Quotes</label></li>
+						<li><label id="offCanvas-categoryLabel">{{currentJoJo}}</label></li>
 						<li><a href="#" id="showAll">Show All</a></li>
 						<li><a href="#" id="shuffle">Shuffle</a></li>
-						<li><a href="#" id="createNewEntry">Enter New</a></li>
+						<li><a href="#" id="createNewEntry">New Entry</a></li>
 					</ul>
 				</aside>
 	
 				<aside class="right-off-canvas-menu" id="categMenu-offCanvas">
 					<ul class="off-canvas-list">
 						<li><label>Play with JoJos</label></li>
-						<li><a href="#" id="newCategory">Createa a JoJo</a></li>
-						<li class="has-submenu"><a href="#" id="changeCategory">Change JoJos</a>
+						<li><a href="#" id="newjojo">Create a JoJo</a></li>
+						<li class="has-submenu"><a href="#" id="changejojo">Your JoJos</a>
 							<ul class="right-submenu">
 								<li class="back"><a href="#">Back</a></li>
-				                <li><label>Your JoJos</label></li>
-				                {{> select_jojo_submenu}}
-				            </ul></li>
+				          {{> select_jojo_submenu}}
+				        </ul></li>
+				    <li class="has-submenu"><a href="#" id="publicjojo">Public JoJos</a>
+					    <ul class="right-submenu">
+								<li class="back"><a href="#">Back</a></li>
+				        <li><label>Find a JoJo</label></li>
+				          {{> public_jojo_submenu}}
+				        </ul></li>
 					</ul>
 				</aside>
 				
@@ -52,13 +58,13 @@
 										<label>Author<input name = "Author" type="text"></label>
 									</div>
 									<div>
-										<label>Quotation <small>required</small><textarea name = "Quotation" type="text" required></textarea></label>
-										<small class="error">Please enter a quote</small>
+										<label>Quotation <small>required</small><textarea name="Quotation" type="text" required></textarea></label>
+										<small class="error">This field is required</small>
 									</div>
 									<div>
 										<label>Source<input name = "Source" type="text"></label>
 									</div>
-									<button id="submitEntry" class = "btn" type="submit" value="submit">Submit</button>
+									<button id="submitEntry" class="btn" type="submit">Submit</button>
 								</fieldset>
 							</form>
 						</div>
@@ -92,9 +98,14 @@
 		</div>
 </template>
 
-
+<!-- Selecting from your private jojos -->
 <template name = "select_jojo_submenu">
 	{{#each jojos}}
-		<li><a href="#" id="{{@key}}Select">{{this.name}}</a></li>
+		<li><a href="#" class="makeJoJoActive" id="{{this.id}}">{{this.name}}</a></li>
 	{{/each}}
+</template>
+
+<!-- Fill this in -->
+<template name = "public_jojo_submenu">
+	<!-- Ideas: text search, most popular / now trending, your favorites, your most submitted -->
 </template>

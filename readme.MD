@@ -5,14 +5,30 @@
 Data Structure
 ----------------
 
-******
+************
 
+Collections:
+
+************
+
+JoJoDB: An array of all (public and private) JoJos. Each contrains:
+	* The jojo
+	* userId of creator
+	* public (boolean)
+	* array of userId for any users that can view (public automatically allows any user to view it in the public folder, but creators of private jojos can share them with other users) 
+
+
+*************
+
+Prototypes:
+
+*************
+
+----------------
 JoJo: has meta-info about entries and contains the entries in an array.
 
-******
-
 Data:
-	* The name (as inputted by user) of the Category
+	* The name (as inputted by user) of the JoJo
 	* Array of the inputs as Input objects
 	* Array of entries as Entry objects
 	* Meteor / Blaze template for displaying entries 
@@ -21,12 +37,8 @@ Data:
 Methods:
 	* displayEntries: based on the passed arguments, creates an array of entries and calls Blaze.renderWithData on the jojo's template with that 
 	
-
-*******
-
+---------------
 Entry: contains information about individual entries
-
-*******
 
 Data:
 	* The name of the parent jojo (as represented in the Mongo collection)
@@ -37,24 +49,12 @@ Data:
 Methods:
 
 
+-----------------
+Input: stores the form inputs
 
-
-Global Variable Scope 
----------------------
-
-Variables:
-	* On login / initialization, all of a user's Categories are made into global variables (with no reference to user)
-	* On logout, user's Categories are saved to the user's jStorage key
-	* masterCategory: the current category in play, as a string
-	* window[masterCategory] will access the current Category as an object
-
-
-
-
-
-
-Drag-and-Drop 
-----------------
-
-Icons:
-	* Each icon contains data attributes that correspond to the type of form they will create when dropped 
+Data:
+	* The name of the input (equal to the prompt unless the user overrides by adding a name)
+	* The prompt 
+	* The type of input
+	* An array of how many inputs / options (will be 1 unless radio, checkbox, or select)
+	* Attributes (default values, required, etc.)

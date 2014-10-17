@@ -1,0 +1,6 @@
+Off Canvas Menu:
+	☐	Event handlers for main menu clicks
+		☐	
+	☐	Layout for private / public jojos
+		☐	Mobile (and medium?): Separate options for private / public jojos
+		☐	Large: on load, display a list of all jojos in a div (side by side, if fit)
