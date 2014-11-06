@@ -1,0 +1,41 @@
+<!-- Top-nav bar containing welcome message, login-dropdown, and the site logo -->
+<template name="top_bar">
+	<div class="fixed header-container">
+		<nav class="top-bar" data-topbar>
+		
+			<!-- jojo title -->
+			<ul class="title-area">
+				<li class="name">
+				{{#if currentUser}}
+					<h1>jojofy your life!</h1>
+				{{else}}
+					<h1>welcome to jojo! please log in to get started.</h1>
+				{{/if}}			
+				</li>
+				<li class="toggle-topbar menu-icon"><a><span></span></a></li>
+			</ul>
+			
+			<section class="top-bar-section">
+				<ul class="right">
+				<!-- Put other menu options here! -->
+					{{#if currentUser}}
+						<li><a class="small button" id="user-logout">Log Out</a></li>
+					{{/if}}
+				</ul>
+			</section>
+
+		</nav>
+		<img id="jojo-icon" src="images/jojo-icon.png">
+	</div>
+	
+	<!-- Div to hold the menu -->
+	<div class="mainMenuContainer">
+		{{#if currentUser}}
+				{{> main_off_canvas_menu}}
+		{{else}}
+		<div class="login-container">
+				<button>{{> loginButtons}}</button>
+		</div>
+		{{/if}} 
+	</div>
+</template>

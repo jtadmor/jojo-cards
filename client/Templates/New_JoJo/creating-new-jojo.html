@@ -1,0 +1,50 @@
+<!-- Bring up the options for creating a new jojo -->
+<template name="creating_new_jojo">
+	<!-- Show each option once the prior one is complete -->
+	<div id="newJoJo-stepsContainer">
+		<h3 id="newJoJo-directions">{{newJoJoStep}}</h3>
+
+		<div class="row">
+			<div class="small-10 medium-9 large-8 small-offset-1 columns">
+				<input type="text" id="set-jojo-title" placeholder="(Hit Enter to submit)">
+				<!-- {{#if step2}}
+				<button id="edit-jojoTitle">Edit</button>
+				{{/if}} -->
+			</div>
+		</div>
+		
+		<!-- Layout buttons 1 per row on small screen, 2 per row on medium, 4 on large -->
+		<div class="row">
+		{{#if step2}}
+			<div class="small-10 small-offset-1 medium-4 large-2 columns">
+				<button id="create-form" data-reveal-id="form-maker-modal">Create Form</button>
+			</div>
+		{{/if}}
+
+		{{#if step3}}
+			<div class="small-10 small-offset-1 medium-4 medium-offset-0 large-2 columns end">
+				<button id = "style-entry" data-reveal-id="style-entry-modal">Style Entries</button>
+			</div>
+		{{/if}}
+		
+		{{#if step4}}
+			<div class="small-10 small-offset-1 medium-4 medium-offset-1 large-2 large-offset-0 columns">
+				<button id="customizeJoJo">Customize</button>
+			</div>
+			<div class="small-10 small-offset-1 medium-4 medium-offset-0 large-2 columns end">
+				<button id="finalizeCreation">Done!</button>
+			</div>
+		{{/if}}
+		</div>
+		
+	</div>
+
+	<!-- The modals for creating forms and styling entries -->
+	
+	<div id="create-form-modal" class="reveal-modal full formSandbox" data-reveal> 
+	  {{> create_form}}
+		<a class="close-reveal-modal">&#215;</a>
+	</div>
+	
+	{{> style_entry}}
+</template>

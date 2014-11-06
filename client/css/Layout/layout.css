@@ -1,0 +1,50 @@
+/* CSS FOR THE SITE TEMPLATE (TOP BAR, LOGIN BUTTON, AND MAIN OFF CANVAS MENU) */
+
+/* Color for the site name */
+.top-bar h1 {
+	color: white;
+	padding-left: 10px;
+}
+
+/* Spacing for the image */
+.header-container img {
+	margin-top: 10px;
+	margin-left: 10px;
+}
+
+/* Provide margin for the logout button */
+.top-bar-section li:last-of-type {
+	margin-right: 10px;
+}
+
+/* 
+
+LOGIN MENU 
+
+
+Note: must style with ID to override defaults from Foundation / Meteor (not even sure which...)
+*/
+
+/* Add margin to the button  */
+
+.login-container {
+	
+	width: 10em;
+	margin: 0 auto;
+}
+
+/*  Change the appearance of the text */
+#login-buttons a.login-link-text {
+
+	text-decoration: none;
+	color: white;
+}
+
+/* Make the main menu container fixed position and load below the top nav and icon */
+.mainMenuContainer {
+
+	position: fixed;
+	top: 210px;
+
+	width: 100vw;
+}

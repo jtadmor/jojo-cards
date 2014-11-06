@@ -1,0 +1,125 @@
+/* 
+
+CREATE A NEW JOJO STYLING
+
+*/
+
+/* #newJoJoStepsContainer contains the buttons / inputs */
+
+div#newJoJo-stepsContainer {
+	padding: 20px;
+
+}
+
+h3#newJoJo-directions {
+	text-align: center;
+}
+
+#newJoJo-stepsContainer button {
+	margin-top: 10px;
+	width: 160px;
+}
+
+/* 
+
+FORM CREATOR (MODAL)
+
+.formSandbox is the entire modal
+.formTemplateContainer is where the model inputs are placed
+.inputContainer hold one individual model input
+.tabMenuHolder contains the tabs for editing options on inputs
+.toolboxHolder contains the buttons for adding / deleting inputs and saving the form
+
+*/
+
+.formSandbox {
+
+	display: none;
+
+	top: 5vh;
+
+	overflow: auto;
+
+	/*styling*/
+	border-radius: 10px;
+	border: 2px solid #007095;
+	box-shadow: 0 0 10px 3px #007095;
+}
+
+.formTemplateContainer {
+
+	overflow: auto;
+
+	height: 50vh;
+
+	margin-top: 20px;
+
+	/*styling*/
+	border-radius: 10px;
+	border: 2px solid #007095;
+	box-shadow: 0 0 10px 3px #007095;
+
+	background: rgba(120,120,120,.2);
+}
+
+.tabMenuHolder {
+	margin-top: 20px;
+}
+
+/* 
+
+FORM TEMPLATE CONTAINER
+
+.empty / . full / .active are possible classes for the individual input containers
+
+.beingEdited and .displayOnly are classes for divs containing the model inputs
+
+*/
+
+.input-container{
+	min-height: 10vh;
+}
+
+.input-container.empty-active:hover {
+	background: rgba(120,120,120,.4);
+}
+
+.input-container.full-active:hover {
+	border: 2px solid #007095;
+	border-radius: 10px;
+	box-shadow: 0 0 10px 3px #007095;
+}
+
+.being-edited {
+	border: 2px solid #007095;
+	border-radius: 10px;
+	box-shadow: 0 0 10px 3px #007095;
+}
+
+
+.display-only input, .display-only select, .display-only textarea {
+	margin: 6px 6px 0 0;
+}
+
+.display-only {
+	margin-top: 6px;
+}
+
+.display-only p {
+	margin: 0;
+}
+
+/* TOOLBOX AND ICONS */
+.toolboxHolder {
+	margin-top: 30px;
+	padding: 6px;
+
+	border-radius: 10px;
+	border: 2px solid #007095;
+	box-shadow: 0 0 10px 3px #007095;
+}
+
+.active-icon {
+	text-shadow: 3px 3px #007095 ;
+}
+

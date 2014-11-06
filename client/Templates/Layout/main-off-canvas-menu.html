@@ -1,0 +1,81 @@
+<!-- Off Canvas Menu For JoJo Viewing and Manipulation -->
+<template name="main_off_canvas_menu">
+	<div class="off-canvas-wrap" data-offcanvas>
+		<div class="inner-wrap">
+			<nav class="tab-bar">
+				
+				<!-- Main menu area -->
+				<section class="middle tab-bar-section" id="sandboxTitle">
+					<!-- Display name of currentJoJo (or Sandbox) -->
+					<h1 class="title">{{currentJoJo}} {{currentActivity}}</h1>
+					<!-- Display the originating user for public jojos -->
+					{{#if publicUser}}
+					<p><em>by <strong>{{publicUser}}</strong></em></p>
+					{{/if}}
+				</section>
+
+				<!-- Left menu button -->
+				<section class="left-small" id="left-off-canvas-toggler">
+					<a class="left-off-canvas-toggle menu-icon"><span></span></a>
+				</section>
+				
+				<!-- Right menu button -->
+				<section class="right-small">
+					<a class="right-off-canvas-toggle menu-icon"><span></span></a>
+				</section>
+			</nav>
+
+			<!-- Left side menu  -->
+			<aside class="left-off-canvas-menu" id="entryMenu-offCanvas">
+				<ul class="off-canvas-list" >
+					<li><label id="offCanvas-categoryLabel">{{currentJoJo}}</label></li>
+					<li><a href="#" id="showAll">Show All</a></li>
+					<li><a href="#" id="shuffle">Shuffle</a></li>
+					<li><a href="{{pathFor route='New Entry'}}" id="create-new-entry">New Entry</a></li>
+				</ul>
+			</aside>
+			
+			<!-- Right side menu -->
+			<aside class="right-off-canvas-menu" id="categMenu-offCanvas">
+				<ul class="off-canvas-list">
+					<li><label>Play with JoJos</label></li>
+					<li><a href="{{pathFor route='Creating New JoJo'}}" id="create-new-jojo">Create a JoJo</a></li>
+					<li class="has-submenu"><a id="changejojo">Your JoJos</a>
+						<ul class="right-submenu">
+							<li class="back"><a>Back</a></li>
+								{{> select_jojo_submenu}}
+							</ul></li>
+					<li class="has-submenu"><a id="publicjojo">Public JoJos</a>
+						<ul class="right-submenu">
+							<li class="back"><a>Back</a></li>
+							<li><label>Find a JoJo</label></li>
+								{{> public_jojo_submenu}}
+							</ul></li>
+				</ul>
+			</aside>
+			
+		
+			<!-- ALL MAIN CONTENT WILL BE DISPLAYED HERE -->
+			<!-- ONE COLLUMN FOR MOBILE / SMALL / MEDIUM SCREENS -->
+			<!-- FOR LARGER SCREENS, TWO COLLUMNS TO FULLY UTILIZE FEATURES -->
+		
+			<section class="main-section" id="mainContainer">
+				{{> yield}}
+			</section>
+	
+			<a class="exit-off-canvas"></a>
+		</div>
+	</div>
+</template>
+
+<!-- Selecting from your private jojos -->
+<template name = "select_jojo_submenu">
+	{{#each jojos}}
+		<li><a href="#" class="activateJoJo" id="{{this.id}}">{{this.name}}</a></li>
+	{{/each}}
+</template>
+
+<!-- Fill this in -->
+<template name = "public_jojo_submenu">
+	<!-- Ideas: text search, most popular / now trending, your favorites, your most submitted -->
+</template>

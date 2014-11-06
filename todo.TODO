@@ -1,6 +1,47 @@
-Off Canvas Menu:
-	☐	Event handlers for main menu clicks
-		☐	
-	☐	Layout for private / public jojos
-		☐	Mobile (and medium?): Separate options for private / public jojos
-		☐	Large: on load, display a list of all jojos in a div (side by side, if fit)
+MAJOR TASKS FOR NOW:
+
+	Off Canvas Menu:
+		☐	Event handlers for main menu clicks
+			✔	New entry	 @done (14-10-30 17:14)
+			☐	Display entries
+				☐	Change JoJo object method to return which jojos to display, rather than calling displayme on individual entries
+				☐	Show all
+				☐	Show random
+		☐	Layout for private / public jojos
+			☐	Mobile (and medium?): Separate options for private / public jojos
+			☐	Large: on load, display a list of all jojos in a div (side by side, if fit)
+		✔	Fix bug where foundation is not loading (kinda fixed) @done (14-10-30 17:15)
+
+
+	Creating JoJo form:
+		✔	Events @done (14-11-03 20:22)
+		☐	Minor Stuff:
+			☐	Change the jojo name input so it doesnt accept keypresses after submit, create an edit button that reactivates and allows user to change the name
+		✔	Change activate icon system to use session variables @done (14-11-03 20:24)
+
+BUG FIXES:
+	☐	Login Bar:
+		☐	Right side of bar (login buttons / user display) dissappears when the menu gets small...
+			☐	Idea: On small screens, log-in using a modal and create a log-out menu option 
+
+MAJOR TASKS COMING UP: 
+
+Initialize jojos:
+	☐	Create an inspirational quotes jojo for each new user
+	☐	Create an appointments jojo for each new user
+	☐	Create a contacts jojo for each new user
+
+Organization: 
+	☐	Split out main.css into its different components and move them into folders
+
+BIG PICTURE:
+
+Learning stuff:
+	☐	Understanding Meteor helper / templates
+		✔	"this" / context when returning mongo documents using a helper (- should work as expected when returning mongo documents through a helper) @done (14-10-20 09:54)
+	☐	Figure out how to make more variables reactive within helper functions so that I don't have to use session variables or database entries for everything (e.g. be able to base it off of the class / attribute / value of a DOM element)
+
+WAY DOWN THE LINE:
+
+Login:
+	☐	Change over from accounts-ui to handling it through meteor (eventually...)

@@ -1,0 +1,48 @@
+/*
+
+	
+*/
+
+/*
+
+MAIN CONTAINER:
+
+1. Holds entries, the edit form box, etc.
+
+*/
+
+
+/* Give the main section a fixed height and overflow auto to allow the tab bar to stay fixed and the content scroll below it */
+
+.main-section {
+	height: 60vh;
+	overflow: auto;
+}
+
+
+/* 
+
+ENTRY CONTAINER:
+
+1. Holds each individual entry
+
+*/
+
+.entryContainer {
+	margin-top: 2em;
+}
+
+
+
+/* 
+
+Off Canvas Menus 
+
+1. Different menus displayed at different times
+
+*/
+
+/* No jojoMaker toolkit at start */
+#jojoMaker-offCanvas {
+	display: none;
+}

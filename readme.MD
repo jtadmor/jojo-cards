@@ -1,6 +1,28 @@
 -------------------------------------------
-			IMPLEMENTATION 
+			FILE ORGANIZATION 
 -------------------------------------------
+
+Views / templates
+
+
+
+
+-------------------------------------------
+			IMPLEMENTATION NOTES
+-------------------------------------------
+
+
+Session Values
+------------------
+
+* currentActivity: A (nice looking) string description of the current activity. Where it makes sense, the string description should be easily convertible to the name of the template that allows for it (e.g. when currentActivity is 'New Entry', the 'new_entry' template is used)
+
+* currentJoJo: The JoJoDB _id for the currently selected jojo (which may be the logged in user's private jojo or a public jojo) 
+
+* newJoJoStep: Which step of the creating new jojo process the user is on (strings 'One' - 'Four')
+
+* createForm-activity: A string descrition of the current activity within creating a form
+
 
 Data Structure
 ----------------
@@ -11,12 +33,10 @@ Collections:
 
 ************
 
-JoJoDB: An array of all (public and private) JoJos. Each contrains:
-	* The jojo
-	* userId of creator
+JoJoDB: An array of all (public and private) JoJos. Each contains:
+	* The jojo object
+	* username of creator
 	* public (boolean)
-	* array of userId for any users that can view (public automatically allows any user to view it in the public folder, but creators of private jojos can share them with other users) 
-
 
 *************
 

@@ -1,0 +1,117 @@
+<!-- Modal / Popup: Creating the form for a new JoJo -->
+<template name = "create_form">
+	<div class="row">
+		<h3>Welcome to the Form Creator.</h3>
+		<p>Hover any button for tips!</p>
+	</div>
+
+	<div class="row">
+		<div class="small-9 columns"><input id="legendInput" type="text" placeholder="Enter a legend for your form"></div>
+	</div>
+	
+	<div class="row formTemplateContainer" id="formTemplateContainer">
+		{{#each inputContainer}} 
+			{{> input_container}}
+		{{/each}}
+	</div>
+	
+	<!-- Holder for the editing tab menu -->
+	<div class="tabMenuHolder" id="tab-menu-holder">
+	</div>
+
+	<!-- The toolbox. -->
+	<div class="row">
+		<div class="toolboxHolder small-12 columns">
+			<ul class= "small-block-grid-3 medium-block-grid-7">
+				<!-- Create each append / trash buttons   -->
+				{{#each touchableInput}}
+					{{> touchable_input}}
+				{{/each}}
+				<li><i data-save="true" class="fa fa-rocket fa-2x" id="saveForm"></i></li>
+			</ul>
+		</div>
+	</div>
+</template>
+
+<!-- Template for the append / trash icons -->
+<template name="touchable_input">
+	<li><i data-action="{{action}}" data-input="{{input}}" class="fa fa-2x touchable-input fa-{{icon}} {{isActive}}"></i></li>
+</template>
+
+
+<!-- Template for the input containers -->
+<template name="input_container">
+	<div class="small-12 medium-12 large-6 columns input-container {{isActive}}" id="{{ind}}-input-container"></div>
+</template>
+
+<!-- Template for model inputs -->
+<!-- Starts with data attributes for the HTML element and the position in the form -->
+<template name="model_input">
+	<div class="display-only {{beingEdited}}" id="{{beingEdited}}" data-element='{{input}}' data-position='{{ind}}'>
+		<label>Click to customize!</label>
+		{{{el}}}
+	</div>
+</template>
+
+
+<!-- Template for the input editing tab menu -->
+<template name="editing_input_tab_menu">
+	<dl class="tabs" data-tab>
+		<dd class><a href="#input-options-tab">Basics</a></dd>
+		{{#if input}}
+			<dd><a href="#input-type-tab">Input Type</a></dd>
+		{{/if}}
+		{{#if addOptions}}
+			<dd><a href="#edit-choices-tab">Choices</a></dd>
+		{{/if}}
+		<dd><a href="#done-editing" id="close-tab-menu">Done</a></dd>
+	</dl>
+
+	<!-- Changing the input options -->
+	<div class="tabs-content">
+		<div class="content" id="input-options-tab">
+			<div class="row">
+					<div class="small-10 small-offset-1 medium-6 medium-offset-0 columns">
+					<label>Input Name (for organization)<input type="text" id="set-input-name" placeholder="(Hit Enter To Submit)"></label>
+				</div>
+				<div class="small-10 small-offset-1 medium-6 medium-offset-0 columns">
+					<label>Input Prompt (the text that goes here)<input type="text" id="set-input-prompt" placeholder="(Hit Enter To Submit)"></label>
+				</div>
+				<div class="small-10 small-offset-1 medium-6 medium-offset-0 end columns">	
+					<label>Default Value (optional)<input type="text" id="set-input-default" placeholder="(Hit Enter To Submit)"></label>
+				</div>
+				<div class="small-10 small-offset-1 medium-6 medium-offset-0 columns">
+					<input type="checkbox" id="set-input-required"><label for="set-input-required">Require this field?</label>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Changing the input type (for plain input) -->
+		{{#if input}}
+			<div class="content" id="input-type-tab">
+				<form>
+					<div class="row">
+						<div class="small-8 small-centered columns">
+							<input type="radio" name="type" value="text" id="inputEdit-text"><label for="inputEdit-text">Text</label>
+							<input type="radio" name="type" value="email" id="inputEdit-email"><label for="inputEdit-email">E-mail</label>
+							<input type="radio" name="type" value="url" id="inputEdit-url"><label for="inputEdit-url">URL</label>
+							<input type="radio" name="type" value="date" id="inputEdit-date"><label for="inputEdit-date">Date</label>
+						</div>
+					</div>
+				</form>
+			</div>
+		{{/if}}
+		
+		<!-- Adding options (for radio, checkbox, select) -->
+		{{#if addOptions}}
+			<div class="content row" id="edit-choices-tab">
+				<div class="small-10 small-offset-1 medium-6 medium-offset-0 medium-centered columns">
+					<label>Add options for this field<input type="text" id="add-input-choice" placeholder="(Hit Enter To Submit)"></label>
+				</div>
+			</div>
+		{{/if}}
+		
+		<!-- Done editing -->
+		<div class="content" id="done-editing"></div>
+	</div>
+</template>

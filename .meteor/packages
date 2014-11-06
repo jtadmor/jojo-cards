@@ -4,11 +4,15 @@
 # but you can also edit it by hand.
 
 meteor-platform
-autopublish
 insecure
 underscore
 mrt:moment
-mquandalle:jade
 random
 jquery
-
+accounts-ui
+accounts-password
+accounts-twitter
+accounts-google
+accounts-facebook
+coffeescript
+iron:router
