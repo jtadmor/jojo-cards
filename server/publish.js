@@ -6,9 +6,19 @@ Meteor.startup( function() {
 		return JoJoDB.find({public: true});
 	});
 
-	// Wait for login to publish the user's private dbs
+	// Will automatically re-publish when the userId changes
 	Meteor.publish('myJoJos', function() {
-		username = Meteor.users.find({_id: this.userId}).username;
-		return JoJoDB.find({username: username});
+		return JoJoDB.find({userId: this.userId});
 	});
+
+	// Publish user data
+	Meteor.publish('allUserData', function() {
+		return Meteor.users.find({}, {fields: {'username': 1, 'emails': 1, 'profile': 1}});
+	});
+
+	// Publish more information for the currently logged in user
+	Meteor.publish('currentUserData', function() {
+		return Meteor.users.find({_id: this.userId});
+	});
+
 });

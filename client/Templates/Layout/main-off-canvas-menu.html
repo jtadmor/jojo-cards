@@ -7,7 +7,7 @@
 				<!-- Main menu area -->
 				<section class="middle tab-bar-section" id="sandboxTitle">
 					<!-- Display name of currentJoJo (or Sandbox) -->
-					<h1 class="title">{{currentJoJo}} {{currentActivity}}</h1>
+					<h1 class="title">{{currentActivity}} {{#if currentJoJo}} : {{currentJoJo}}{{/if}} </h1>
 					<!-- Display the originating user for public jojos -->
 					{{#if publicUser}}
 					<p><em>by <strong>{{publicUser}}</strong></em></p>
@@ -71,7 +71,7 @@
 <!-- Selecting from your private jojos -->
 <template name = "select_jojo_submenu">
 	{{#each jojos}}
-		<li><a href="#" class="activateJoJo" id="{{this.id}}">{{this.name}}</a></li>
+		<li><a href="#" class="activateJoJo" id="{{this._id}}">{{this.name}}</a></li>
 	{{/each}}
 </template>
 

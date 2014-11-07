@@ -15,10 +15,15 @@ h3#newJoJo-directions {
 	text-align: center;
 }
 
-#newJoJo-stepsContainer button {
+#newJoJo-stepsContainer .button {
 	margin-top: 10px;
 	width: 160px;
 }
+
+#newJoJo-stepsContainer .button.disabled {
+	background: rgba(0, 140, 210, 0.5);
+}
+
 
 /* 
 
@@ -92,7 +97,6 @@ FORM TEMPLATE CONTAINER
 
 .being-edited {
 	border: 2px solid #007095;
-	border-radius: 10px;
 	box-shadow: 0 0 10px 3px #007095;
 }
 

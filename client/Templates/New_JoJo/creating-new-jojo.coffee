@@ -5,17 +5,21 @@ Template helpers and event handlers for creating a new jojo.
 ###
 
 Template.creating_new_jojo.helpers(
-	# Display text of step (and if user went directly here and 'newJoJoStep' has not yet been set, set it to step one)
+	# Display text of step
 	newJoJoStep: () ->
-		if not Session.get('newJoJoStep')? then Session.set('newJoJoStep', 'Step One: Name Your JoJo')
+		# If user navigated directly to this URL or if the user refreshes at a later step but has lost the value of the jojo
+		if $('set-jojo-title').val() is '' or not Session.get('newJoJoStep')
+			Session.set('newJoJoStep', 'Step One: Name Your JoJo') 
+		# Return the step
 		Session.get('newJoJoStep')
+
 
 	# Helpers for which step it is
 	step2: () ->
-		Session.get('newJoJoStep').match(/Two|Three|Four/)
+		Session.get('newJoJoStep').match(/Two/)
 
 	step3: () ->
-		Session.get('newJoJoStep').match(/Three|Four/)
+		Session.get('newJoJoStep').match(/Three/)
 
 	step4: () ->
 		Session.get('newJoJoStep').match(/Four/)
@@ -31,10 +35,14 @@ Template.creating_new_jojo.events(
 	'keypress #set-jojo-title': (e) ->
 		if Session.get('newJoJoStep').match(/One/)
 			if e.which is 13
+				e.preventDefault()
 				Session.set('newJoJoStep', 'Step Two: Create The Form')
+				
 				# Create a new JoJoDB entry and set the currentJoJo
-				id = JoJoDB.insert({username: Meteor.user().username, jojo: {name: $(e.target).val()} }, (err, id) ->
-					if err then console.log err
+				# Insert it with empty input array, empty entry array, public: false, and set the name and userId
+				JoJoDB.insert({userId: Meteor.userId(), public: false, jojo: {name: $(e.target).val()}, inputs: [], entries: []}, (err, id) ->
+					if err 
+						console.log err
 					else
 						console.log(id)
 						Session.set('currentJoJo', id)
@@ -47,9 +55,19 @@ Template.creating_new_jojo.events(
 	# Move up a step and open the create form modal
 	'click #create-form': (e) ->
 		if Session.get('newJoJoStep').match(/Two/) 
+			# Update the session
 			Session.set('newJoJoStep', 'Step Three: Style The Entries')
-		$('#create-form-modal').foundation('reveal','open')
+
+			# Render the template and open the modal
+			Blaze.render(Template.create_form, $('#form-edit-modal')[0])
+			$('#form-edit-modal').foundation('reveal','open')
 
 	'click #style-entry': (e) ->
-		Session.set('newJoJoStep', 'Step Four: Advanced Settings (optional)')
+		if Session.get('newJoJoStep').match(/Three/)
+			# Update session
+			Session.set('newJoJoStep', 'Step Four: Advanced Settings (optional)')
+
+			# Render the template and open the modal
+			Blaze.render(Template.style_entry, $('#form-edit-modal')[0])
+			$('#form-edit-modal').foundation('reveal','open')
 )

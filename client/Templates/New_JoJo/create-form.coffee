@@ -1,7 +1,12 @@
 # ------------ CREATE FORM MODAL -------------
 
 Template.create_form.events(
-	
+	# Save the data from the model form
+	'click #save-form': () ->
+		# Some stuff
+
+		# Empty the modal and close it
+		$('#form-edit-modal').empty().foundation('reveal','close')
 )
 
 Template.create_form.helpers(
@@ -15,11 +20,9 @@ Template.create_form.helpers(
 		{ action: 'append', input: 'select', icon: 'list-alt'},
 		{ action: 'trash', input: '', icon: 'trash'} ]
 
-	# Create 12 input containers and pass each their index to use in the id
+	# Create 12 input containers
 	inputContainer: () ->
-		x=[]
-		x.push({ind: i}) for i in [0..11]
-		x
+		[0..11]
 )
 
 # ---------- INPUT CONTAINERS -----------
@@ -41,14 +44,16 @@ Template.input_container.events(
 	# Render the model input in an empty-active input-container 
 	'click .empty-active': (e, template) ->
 		
+		data = Blaze.getData($('.active-icon')[0])
+
 		# Get the data from active icon
-		input = $('.active-icon').data('input')
+		input = data.input
 
 		# Create the element using the active icon
-		el = '<'+ input + '>'
+		el = '<'+ data.input + '>'
 		
 		# Get the id of the parent input container
-		ind = $(e.target).attr('id').match(/\d+/g)[0]
+		ind = Blaze.getData(e.target)
 		
 		# Render the model input
 		Blaze.renderWithData(Template.model_input, {el: el, ind: ind, input: input}, e.target)
@@ -74,7 +79,8 @@ Template.touchable_input.helpers(
 Template.touchable_input.events(
 	# Clicking a touchable-input changes the createForm-activity to 'append ___' or 'trash' 
 	'click .touchable-input': (e) ->
-		activity = e.target.dataset.action + ' ' + e.target.dataset.input
+		data = Blaze.getData(e.target)
+		activity = data.action + ' ' + data.input
 		Session.set('createForm-activity', activity.trim())
 )
 
@@ -84,13 +90,14 @@ Template.model_input.helpers (
 	# Set 'being-edited' if the activity is 'editing [index]' and the index matches
 	beingEdited: () ->
 		if Session.get('createForm-activity')?.match(/editing/)
-			'being-edited' if Session.get('createForm-activity')?.match(/\d+/g)[0] is Template.instance().data.ind
+			'being-edited' if Session.get('createForm-activity')?.match(/\d+/g)[0] is Template.instance().data.ind.toString()
 )			
 
 Template.model_input.events (
-	# On click, change the activity to reflect the currently edited input and render the tab menu for editing the input. If something is already being edited, do nothing.
+	# On click, change the activity to reflect the currently edited input and render the tab menu for editing the input. 
+	# If already editing what you clicked on or if trashing an input, do nothing.
 	'click .display-only': (e, template) ->
-		unless $('#tab-menu-holder').children().length
+		unless $(e.currentTarget).hasClass('being-edited') or Session.get('createForm-activity', 'trash')
 			# Get the index and set the activity
 			current = template.data.ind
 			Session.set('createForm-activity', "editing #{current}")
@@ -124,7 +131,7 @@ Template.editing_input_tab_menu.rendered = () ->
 	
 	# Save the view and the index
 	temp = this.view
-	index = $('#being-edited').closest('.input-container')?.attr('id')?.match(/\d/g)[0]
+	index = Blaze.getData( $('#being-edited').closest('.input-container')[0] )
 	this.autorun( ()->
 		# Get the index of the currently being edited input's container
 
@@ -174,6 +181,10 @@ Template.editing_input_tab_menu.events(
 
 			# Reset the input
 			$(e.target).val('')
+
+	# Change the input type
+	'change input[name="type"]': (e) ->
+		$('#being-edited').attr('data-type', $('#input-type-tab input[type="radio"]:checked').val() )
 
 	# Finish up editing by changing the current activity
 	'click #close-tab-menu': (e)->

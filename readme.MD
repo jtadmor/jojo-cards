@@ -35,7 +35,7 @@ Collections:
 
 JoJoDB: An array of all (public and private) JoJos. Each contains:
 	* The jojo object
-	* username of creator
+	* userId of the creator
 	* public (boolean)
 
 *************

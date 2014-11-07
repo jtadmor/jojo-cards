@@ -27,7 +27,7 @@
 				{{#each touchableInput}}
 					{{> touchable_input}}
 				{{/each}}
-				<li><i data-save="true" class="fa fa-rocket fa-2x" id="saveForm"></i></li>
+				<li><i class="fa fa-rocket fa-2x" id="save-form"></i></li>
 			</ul>
 		</div>
 	</div>
@@ -35,13 +35,13 @@
 
 <!-- Template for the append / trash icons -->
 <template name="touchable_input">
-	<li><i data-action="{{action}}" data-input="{{input}}" class="fa fa-2x touchable-input fa-{{icon}} {{isActive}}"></i></li>
+	<li><i class="fa fa-2x touchable-input fa-{{icon}} {{isActive}}"></i></li>
 </template>
 
 
 <!-- Template for the input containers -->
 <template name="input_container">
-	<div class="small-12 medium-12 large-6 columns input-container {{isActive}}" id="{{ind}}-input-container"></div>
+	<div class="small-12 medium-12 large-6 columns input-container {{isActive}}"></div>
 </template>
 
 <!-- Template for model inputs -->
@@ -91,7 +91,8 @@
 			<div class="content" id="input-type-tab">
 				<form>
 					<div class="row">
-						<div class="small-8 small-centered columns">
+						<div class="small-10 small-centered columns">
+						<label>Choose the type of data you want for this field</label>
 							<input type="radio" name="type" value="text" id="inputEdit-text"><label for="inputEdit-text">Text</label>
 							<input type="radio" name="type" value="email" id="inputEdit-email"><label for="inputEdit-email">E-mail</label>
 							<input type="radio" name="type" value="url" id="inputEdit-url"><label for="inputEdit-url">URL</label>

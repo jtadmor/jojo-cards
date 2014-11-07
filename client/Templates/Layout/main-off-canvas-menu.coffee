@@ -25,7 +25,8 @@ Template.main_off_canvas_menu.helpers(
 #	user: return the user if there is a current public jojo (not in sandbox mode)
 #	Used to display the user of the JoJo in the menu center
 	publicUser: () -> 
-		JoJoDB.findOne(Session.get("currentJoJo")).username if JoJoDB.findOne(Session.get("currentJoJo"))?.public
+		if JoJoDB.findOne(Session.get("currentJoJo"))?.public
+			Meteor.users.findOne( (JoJoDB.findOne(Session.get("currentJoJo")).userId) ).username
 )
 
 # EVENT HANDLERS FOR THE MAIN MENU

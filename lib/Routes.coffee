@@ -5,7 +5,7 @@ Router.configure(
 
 # Set up the template look-up convertor to go from e.g. 'New Entry' to 'new_entry'
 Router.setTemplateNameConverter((str) -> 
-	str.toLowerCase().replace(' ', '_')
+	str?.toLowerCase().replace(' ', '_')
 )
 
 # ---------- ROUTES ------------ 
