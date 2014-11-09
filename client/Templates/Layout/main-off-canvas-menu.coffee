@@ -1,14 +1,30 @@
-# Events and handlers for:
+### 
 
-# - Main off canvas menu
-# - Select JoJo submenu
-# - Public JoJo submenu
+Events and handlers for:
 
-###
-
--------------- MAIN MENU ------------------
+- Main off canvas menu
+- Select JoJo submenu
+- Public JoJo submenu
 
 ###
+
+#  -------------- MAIN MENU ------------------
+
+Template.main_off_canvas_menu.helpers(
+
+	# if the current jojo is public, the user who created it
+	publicJoJoUser: () -> 
+		if JoJoDB.findOne(Session.get("currentJoJo"))?.public
+			user = Meteor.users.findOne( (JoJoDB.findOne(Session.get("currentJoJo")).userId) )
+			user.username or user.profile.name
+
+	home: () ->
+		Session.equals('currentActivity', 'Welcome')
+
+)
+
+Template.main_off_canvas_menu.events(
+)
 
 # On render, load foundation
 Template.main_off_canvas_menu.rendered = () -> 
@@ -20,31 +36,7 @@ Template.main_off_canvas_menu.rendered = () ->
 		)
 	, 500)
 
-# HELPERS
-Template.main_off_canvas_menu.helpers(
-#	user: return the user if there is a current public jojo (not in sandbox mode)
-#	Used to display the user of the JoJo in the menu center
-	publicUser: () -> 
-		if JoJoDB.findOne(Session.get("currentJoJo"))?.public
-			Meteor.users.findOne( (JoJoDB.findOne(Session.get("currentJoJo")).userId) ).username
-)
-
-# EVENT HANDLERS FOR THE MAIN MENU
-Template.main_off_canvas_menu.events(
-
-	'click #create-new-entry': () ->
-		Session.set('currentActivity', 'New Entry')
-
-	'click #create-new-jojo': () ->
-		Session.set('currentActivity', 'Creating New JoJo')
-		Session.set('newJoJoStep', 'Step One: Name Your JoJo')
-)
-
-###
-
------------------- SELECTING PRIVATE JOJO --------------
-
-###
+# ------------------ SELECTING PRIVATE JOJO --------------
 
 Template.select_jojo_submenu.helpers(
 
@@ -57,9 +49,10 @@ Template.select_jojo_submenu.helpers(
 
 Template.select_jojo_submenu.events(
 
-	'click .activateJoJo': () -> 
-	
-	 # Change the currentJoJo on click
+	# When activiating a jojo, set it to the currently active jojo, reset activity, route home
+	'click .activateJoJo': (e) ->
+		Session.set('currentJoJo', $(e.target).data('id'))
+		Session.set('currentActivity', '')
 )
 
 # SELECTING / SEARCHING PUBLIC JOJOS 

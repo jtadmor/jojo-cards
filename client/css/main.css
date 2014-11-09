@@ -1,48 +1,39 @@
 /*
 
-	
-*/
-
-/*
-
 MAIN CONTAINER:
 
 1. Holds entries, the edit form box, etc.
 
 */
 
-
 /* Give the main section a fixed height and overflow auto to allow the tab bar to stay fixed and the content scroll below it */
 
 .main-section {
-	height: 60vh;
+	height: calc(100vh - 45px);
 	overflow: auto;
-}
 
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
 
 /* 
 
-ENTRY CONTAINER:
-
-1. Holds each individual entry
+GLOBAL STYLES FOR ICONS, FONTS, ...
 
 */
 
-.entryContainer {
-	margin-top: 2em;
+/* Sizing for the small jojo icon */
+.small-icon {
+	height: 40px;
 }
 
-
-
-/* 
-
-Off Canvas Menus 
-
-1. Different menus displayed at different times
-
-*/
-
-/* No jojoMaker toolkit at start */
-#jojoMaker-offCanvas {
-	display: none;
+/* Set up fonts */
+.indie-flower {
+	font-family: 'Indie Flower', cursive;
 }
+
+.dancing-script {
+	font-family: 'Dancing Script', cursive;
+}
+

@@ -1,0 +1,12 @@
+<!-- Top-nav bar containing welcome message, login-dropdown, and the site logo -->
+<template name="layout">	
+	<!-- Div to hold the menu -->
+		{{#if currentUser}}
+				{{> main_off_canvas_menu}}
+		{{else}}
+		<img id="jojo-icon" src="images/jojo-icon.png">
+		<div class="login-container">
+				<button>{{> loginButtons}}</button>
+		</div>
+		{{/if}} 
+</template>

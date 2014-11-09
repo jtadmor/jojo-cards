@@ -1,16 +1,16 @@
 <!-- Off Canvas Menu For JoJo Viewing and Manipulation -->
 <template name="main_off_canvas_menu">
-	<div class="off-canvas-wrap" data-offcanvas>
+	<div class="fixed header-container off-canvas-wrap" data-offcanvas>
 		<div class="inner-wrap">
 			<nav class="tab-bar">
 				
 				<!-- Main menu area -->
-				<section class="middle tab-bar-section" id="sandboxTitle">
+				<section class="middle tab-bar-section">
 					<!-- Display name of currentJoJo (or Sandbox) -->
-					<h1 class="title">{{currentActivity}} {{#if currentJoJo}} : {{currentJoJo}}{{/if}} </h1>
+					<h1 class="title">{{> yield "title"}}</h1>
 					<!-- Display the originating user for public jojos -->
-					{{#if publicUser}}
-					<p><em>by <strong>{{publicUser}}</strong></em></p>
+					{{#if publicJoJoUser}}
+					<p><em>by <strong>{{publicJoJoUser}}</strong></em></p>
 					{{/if}}
 				</section>
 
@@ -28,29 +28,35 @@
 			<!-- Left side menu  -->
 			<aside class="left-off-canvas-menu" id="entryMenu-offCanvas">
 				<ul class="off-canvas-list" >
-					<li><label id="offCanvas-categoryLabel">{{currentJoJo}}</label></li>
-					<li><a href="#" id="showAll">Show All</a></li>
-					<li><a href="#" id="shuffle">Shuffle</a></li>
-					<li><a href="{{pathFor route='New Entry'}}" id="create-new-entry">New Entry</a></li>
+					<li><a href="/profile">{{{jojoIcon}}} {{currentUserName}}</a></li>
+		
+					<li><label>Select A JoJo</label></li>
+					<li class="has-submenu"><a id="changejojo">My JoJos</a>
+						<ul class="left-submenu">
+							<li class="back"><a>Back</a></li>
+								{{> select_jojo_submenu}}
+							</ul></li>
+					<li class="has-submenu"><a id="publicjojo">Public JoJos</a>
+						<ul class="left-submenu">
+							<li class="back"><a>Back</a></li>
+							<li><label>Find a JoJo</label></li>
+								{{> public_jojo_submenu}}
+							</ul></li>
+					<li><label>{{currentJoJoName}}</label></li>
+					<li><a href="#" id="show-entries">All Entries</a></li>
+					<li><a href="#" id="random-entries">Random Entry</a></li>
 				</ul>
 			</aside>
 			
 			<!-- Right side menu -->
 			<aside class="right-off-canvas-menu" id="categMenu-offCanvas">
 				<ul class="off-canvas-list">
-					<li><label>Play with JoJos</label></li>
-					<li><a href="{{pathFor route='Creating New JoJo'}}" id="create-new-jojo">Create a JoJo</a></li>
-					<li class="has-submenu"><a id="changejojo">Your JoJos</a>
-						<ul class="right-submenu">
-							<li class="back"><a>Back</a></li>
-								{{> select_jojo_submenu}}
-							</ul></li>
-					<li class="has-submenu"><a id="publicjojo">Public JoJos</a>
-						<ul class="right-submenu">
-							<li class="back"><a>Back</a></li>
-							<li><label>Find a JoJo</label></li>
-								{{> public_jojo_submenu}}
-							</ul></li>
+					
+					{{#if currentJoJoId}}
+						<li><a href="/newentry/{{currentJoJoId}}">New Entry</a></li>
+					{{/if}}
+					
+					<li><a href="/createnewjojo" id="create-new-jojo">Create a JoJo</a></li>
 				</ul>
 			</aside>
 			
@@ -59,10 +65,14 @@
 			<!-- ONE COLLUMN FOR MOBILE / SMALL / MEDIUM SCREENS -->
 			<!-- FOR LARGER SCREENS, TWO COLLUMNS TO FULLY UTILIZE FEATURES -->
 		
-			<section class="main-section" id="mainContainer">
+			<section class="main-section" id="main-container">
 				{{> yield}}
 			</section>
-	
+
+			<section class="second-section" id="second-container">
+				{{> yield "second activity"}}
+			</section>
+
 			<a class="exit-off-canvas"></a>
 		</div>
 	</div>
@@ -71,7 +81,7 @@
 <!-- Selecting from your private jojos -->
 <template name = "select_jojo_submenu">
 	{{#each jojos}}
-		<li><a href="#" class="activateJoJo" id="{{this._id}}">{{this.name}}</a></li>
+		<li><a class="activateJoJo" data-id="{{this._id}}">{{this.name}}</a></li>
 	{{/each}}
 </template>
 

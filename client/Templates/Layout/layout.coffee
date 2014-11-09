@@ -1,6 +1,8 @@
 # Helpers and Events for the top-bar (which is the main layout)
 
-Template.top_bar.events(
+
+
+Template.layout.events(
 
 # Logout
 	'click #user-logout': () ->
@@ -8,3 +10,5 @@ Template.top_bar.events(
 			Router.go('/')
 		)
 )
+
+

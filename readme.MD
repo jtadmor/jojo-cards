@@ -33,8 +33,11 @@ Collections:
 
 ************
 
-JoJoDB: An array of all (public and private) JoJos. Each contains:
-	* The jojo object
+JoJoDB: Collection of all (public and private) JoJos. Each contains:
+	* JoJo options
+	* Name
+	* Entries array (pointing to IDs)
+	* Inputs array (containing the inputs themselves)
 	* userId of the creator
 	* public (boolean)
 

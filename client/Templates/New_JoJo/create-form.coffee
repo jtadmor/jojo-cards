@@ -3,26 +3,37 @@
 Template.create_form.events(
 	# Save the data from the model form
 	'click #save-form': () ->
-		# Some stuff
+		# Grab the data elements from each input and save them under the current jojo
+		$('.display-only').each(()->
+			JoJoDB.update({_id: Session.get('currentJoJo')}, { $push: {'form.inputs': $(this).data()} })
+		)
 
-		# Empty the modal and close it
+		# Grab the legend
+		JoJoDB.update({_id: Session.get('currentJoJo')}, {$set: {'form.legend': $('#legend-input').val()}})
+
+		# Close the modal and empty it
 		$('#form-edit-modal').empty().foundation('reveal','close')
 )
 
 Template.create_form.helpers(
-	# Creating the touchable input Toolbar
+	# Creating the touchable input Toolbar (unless it is already there)
 	# Each clickable has properties 'action' of 'append' or 'trash', 'input' representing the html object, and 'icon' the fa-icon picture
 	touchableInput: () ->
-		[ { action: 'append', input: 'input', icon: 'font' }, 
-		{	action: 'append', input: 'textarea', icon: 'pencil-square-o'}, 
-		{	action: 'append', input: 'input type="radio"', icon: 'dot-circle-o'}, 
-		{	action: 'append', input: 'input type="checkbox"', icon: 'check-square-o'},
-		{ action: 'append', input: 'select', icon: 'list-alt'},
-		{ action: 'trash', input: '', icon: 'trash'} ]
+		unless $('.touchable-input').length
+			[ { action: 'append', input: 'input', icon: 'font' }, 
+			{	action: 'append', input: 'textarea', icon: 'pencil-square-o'}, 
+			{	action: 'append', input: 'input type="radio"', icon: 'dot-circle-o'}, 
+			{	action: 'append', input: 'input type="checkbox"', icon: 'check-square-o'},
+			{ action: 'append', input: 'select', icon: 'list-alt'},
+			{ action: 'trash', input: '', icon: 'trash'} ]
 
 	# Create 12 input containers
 	inputContainer: () ->
 		[0..11]
+
+	# Hide the toolbar when editing an input
+	editingInput: () ->
+		Session.get('createForm-activity')?.match(/editing/)
 )
 
 # ---------- INPUT CONTAINERS -----------
@@ -31,13 +42,13 @@ Template.input_container.helpers(
 	# Set 'empty-active' or 'full-active' based on whether the container has a child element and what the activity is
 	isActive: () ->
 		# Get which template instance we are working with
-		current = Template.instance().data.ind
+		current = Template.currentData()
 		
 		# Return 'active' as appropriate
 		if Session.get('createForm-activity')?.match(/append/)
-			'empty-active' if not $("##{current}-input-container").children().length
+			'empty-active' if not $(".input-container").eq(current).children().length
 		else if Session.equals('createForm-activity', 'trash')
-			'full-active' if $("##{current}-input-container").children().length
+			'full-active' if $(".input-container").eq(current).children().length
 )
 
 Template.input_container.events(
@@ -94,9 +105,16 @@ Template.model_input.helpers (
 )			
 
 Template.model_input.events (
-	# On click, change the activity to reflect the currently edited input and render the tab menu for editing the input. 
-	# If already editing what you clicked on or if trashing an input, do nothing.
+	### 
+	On click:
+	1. Prevent default
+	2. Change the activity to reflect the currently edited input
+	3. Render the tab menu for editing the input. 
+	4. If already editing what you clicked on or if trashing an input, do nothing.
+	###
 	'click .display-only': (e, template) ->
+		e.preventDefault()
+
 		unless $(e.currentTarget).hasClass('being-edited') or Session.get('createForm-activity', 'trash')
 			# Get the index and set the activity
 			current = template.data.ind
@@ -128,7 +146,6 @@ Template.editing_input_tab_menu.rendered = () ->
 	# Intialize foundation
 	$('#tab-menu-holder').foundation()
 	
-	
 	# Save the view and the index
 	temp = this.view
 	index = Blaze.getData( $('#being-edited').closest('.input-container')[0] )
@@ -144,18 +161,15 @@ Template.editing_input_tab_menu.rendered = () ->
 Template.editing_input_tab_menu.events(
 
 	# Grab prompt, name, default value from the respective inputs
-	'keypress #set-input-prompt': (e) ->
-		if e.which is 13 
-			$('#being-edited').attr('data-prompt', $(e.target).val())
-			$('#being-edited').find('label').text($(e.target).val())
+	'keyup #set-input-prompt, keypress #set-input-prompt': (e) ->
+		$('#being-edited').attr('data-prompt', $(e.target).val())
+		$('#being-edited').find('label').text($(e.target).val())
 
-	'keypress #set-input-name': (e)->
-		if e.which is 13 
-			$('#being-edited').attr('data-name', $(e.target).val())
+	'keyup #set-input-name, keypress #set-input-name': (e)->
+		$('#being-edited').attr('data-name', $(e.target).val())
 
-	'keypress #set-input-default': (e)->
-		if e.which is 13 
-			$('#being-edited').attr('data-default', $(e.target).val())
+	'keyup #set-input-default, keypress #set-input-default': (e)->
+		$('#being-edited').attr('data-default', $(e.target).val())
 
 	# Toggle input required
 	'change #set-input-required': (e)->
@@ -166,9 +180,9 @@ Template.editing_input_tab_menu.events(
 		domEl = $('#being-edited')
 		if e.which is 13
 			# Update the data field
-			count = domEl.attr('data-choices-count') or 0
-			domEl.attr('data-choices-count', Number(count) + 1)
-			domEl.attr('data-choices-' + (Number(count)+1), $(e.target).val())
+			if domEl.attr('data-choices-count') then count = Number(domEl.attr('data-choices-count')) + 1 else count = 1
+			domEl.attr('data-choices-count', count)
+			domEl.attr('data-choices' + count, $(e.target).val())
 
 			# Update the display
 			if domEl.attr('data-element') is 'select'

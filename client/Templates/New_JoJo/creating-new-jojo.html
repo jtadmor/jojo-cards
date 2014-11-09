@@ -1,8 +1,8 @@
 <!-- Bring up the options for creating a new jojo -->
 <template name="creating_new_jojo">
-	<div>
+	<div class="newJoJo-stepsContainer">
 		<!-- Display the step information -->
-		<h3>{{newJoJoStep}}</h3>
+		<h3 class="indie-flower">{{newJoJoStep}}</h3>
 
 		<div class="row">
 			<div class="small-10 medium-9 large-8 small-offset-1 columns">
@@ -26,14 +26,14 @@
 			</div>
 			<!-- Save -->
 			<div class="small-10 small-offset-1 medium-4 medium-offset-0 large-2 columns end">
-				<a class="radius button {{#unless step4}}disabled{{/unless}}" id="finalize-creation">Done!</a>
+				<a class="radius button {{#unless step4}}disabled{{/unless}}" id="finalize-creation">Save!</a>
 			</div>
 		</div>
 		<!-- Done with steps container -->
 	</div>
 
-	<!-- The modal for creating forms and styling entries -->
-	<div id="form-edit-modal" class="reveal-modal full formSandbox" data-reveal> 
+	<!-- The modals for creating forms and styling entries -->
+	<div id="form-edit-modal" class="reveal-modal full form-sandbox" data-reveal> 
 	</div>
 
 </template>

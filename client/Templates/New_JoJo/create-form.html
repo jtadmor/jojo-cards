@@ -6,7 +6,7 @@
 	</div>
 
 	<div class="row">
-		<div class="small-9 columns"><input id="legendInput" type="text" placeholder="Enter a legend for your form"></div>
+		<div class="small-9 columns"><input id="legend-input" type="text" placeholder="Enter a legend for your form"></div>
 	</div>
 	
 	<div class="row formTemplateContainer" id="formTemplateContainer">
@@ -20,6 +20,7 @@
 	</div>
 
 	<!-- The toolbox. -->
+	{{#unless editingInput}}
 	<div class="row">
 		<div class="toolboxHolder small-12 columns">
 			<ul class= "small-block-grid-3 medium-block-grid-7">
@@ -31,6 +32,7 @@
 			</ul>
 		</div>
 	</div>
+	{{/unless}}
 </template>
 
 <!-- Template for the append / trash icons -->
@@ -72,13 +74,13 @@
 		<div class="content" id="input-options-tab">
 			<div class="row">
 					<div class="small-10 small-offset-1 medium-6 medium-offset-0 columns">
-					<label>Input Name (for organization)<input type="text" id="set-input-name" placeholder="(Hit Enter To Submit)"></label>
+					<label>Name<input type="text" id="set-input-name" placeholder="Useful for organizing your jojos"></label>
 				</div>
 				<div class="small-10 small-offset-1 medium-6 medium-offset-0 columns">
-					<label>Input Prompt (the text that goes here)<input type="text" id="set-input-prompt" placeholder="(Hit Enter To Submit)"></label>
+					<label>Prompt<input type="text" id="set-input-prompt" placeholder='This will be where "Prompt" is'></label>
 				</div>
 				<div class="small-10 small-offset-1 medium-6 medium-offset-0 end columns">	
-					<label>Default Value (optional)<input type="text" id="set-input-default" placeholder="(Hit Enter To Submit)"></label>
+					<label>Default Value<input type="text" id="set-input-default" placeholder="A default value if the user enters nothing"></label>
 				</div>
 				<div class="small-10 small-offset-1 medium-6 medium-offset-0 columns">
 					<input type="checkbox" id="set-input-required"><label for="set-input-required">Require this field?</label>

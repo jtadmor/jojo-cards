@@ -19,10 +19,8 @@ MAJOR TASKS FOR NOW:
 			☐	Change the jojo name input so it doesnt accept keypresses after submit, create an edit button that reactivates and allows user to change the name
 		✔	Change activate icon system to use session variables @done (14-11-03 20:24)
 
-BUG FIXES:
-	☐	Login Bar:
-		☐	Right side of bar (login buttons / user display) dissappears when the menu gets small...
-			☐	Idea: On small screens, log-in using a modal and create a log-out menu option 
+MINOR TASKS:
+	☐	Add "contentFor title" to each templates for the {{> yield "title"}} in main bar
 
 MAJOR TASKS COMING UP: 
 
@@ -32,12 +30,12 @@ Initialize jojos:
 	☐	Create a contacts jojo for each new user
 
 Organization: 
-	☐	Split out main.css into its different components and move them into folders
+	✔	Split out main.css into its different components and move them into folders @done (14-11-08 21:43)
 
 BIG PICTURE:
 
 Learning stuff:
-	☐	Understanding Meteor helper / templates
+	✔	Understanding Meteor helper / templates @done (14-11-08 21:43)
 		✔	"this" / context when returning mongo documents using a helper (- should work as expected when returning mongo documents through a helper) @done (14-10-20 09:54)
 	☐	Figure out how to make more variables reactive within helper functions so that I don't have to use session variables or database entries for everything (e.g. be able to base it off of the class / attribute / value of a DOM element)
 

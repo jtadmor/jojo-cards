@@ -1,25 +1,30 @@
 <!-- TEMPLATE FOR CREATING NEW ENTRIES WITHIN A JOJO -->
 <template name="new_entry">
-	<div class="row">
-		<div class = "formContainer small-12 medium-8 medium-centered large-6 large-centered columns">
-			
-	<!-- Shell of the entry form (to be displayed only if live form entry session variable is true)-->
-			<form id="entryForm" class="entryForm" data-abide>
-				<fieldset>
-					<legend>Enter a New Quotation</legend>
-					<div>
-						<label>Author<input name = "Author" type="text"></label>
-					</div>
-					<div>
-						<label>Quotation <small>required</small><textarea name="Quotation" type="text" required></textarea></label>
-						<small class="error">This field is required</small>
-					</div>
-					<div>
-						<label>Source<input name = "Source" type="text"></label>
-					</div>
-					<button id="submitEntry" class="btn" type="submit">Submit</button>
-				</fieldset>
-			</form>
-		</div>
+	<div class="form-container row">
+		<form id="entry-form" class="entry-form" data-abide>
+			<fieldset>
+				<legend>{{form.legend}}</legend>
+				<div class="row">
+					{{#each inputContainers}}
+						{{> entry_form_input_container}}
+					{{/each}}
+					{{#each form.inputs}}
+						{{inputDisplay}}
+					{{/each}}
+				</div>
+			</fieldset>
+		</form>
 	</div>
+</template>
+
+<!-- CONTAINER FOR INDIVIDUAL INPUTS -->
+<template name="entry_form_input_container">
+	<div class="small-12 medium-12 large-6 columns entry-form-input-container"></div>
+</template>
+
+<!-- TEMPLATE FOR INDIVIDUAL INPUTS -->
+<template name="input">
+		<label for="{{name}}">{{prompt}}</label>
+		<p>{{prompt}}</p>
+		<!-- {{{el}}} -->
 </template>
