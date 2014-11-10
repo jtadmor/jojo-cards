@@ -2,9 +2,20 @@
 			FILE ORGANIZATION 
 -------------------------------------------
 
-Views / templates
+Templates
+---------
 
+Templates and their associated helpers / event handlers are in client/Templates/__
 
+Subfolders include: 
+
+* Layout: Layout (controls display of jojo menu or login menu) and the jojo menu
+* Home: The welcome page, displayed upon loging in
+* Entries: Displaying a jojo's entries and creating new entries
+* New JoJo: Creating a new jojo, including the modals for creating forms and styling entries
+* Profile: Displaying a user's profile
+
+global-helpers.coffee contains the helpers that are accessible to all templates.
 
 
 -------------------------------------------
@@ -12,7 +23,7 @@ Views / templates
 -------------------------------------------
 
 
-Session Values
+Session Variables
 ------------------
 
 * currentActivity: A (nice looking) string description of the current activity. Where it makes sense, the string description should be easily convertible to the name of the template that allows for it (e.g. when currentActivity is 'New Entry', the 'new_entry' template is used)
@@ -36,48 +47,8 @@ Collections:
 JoJoDB: Collection of all (public and private) JoJos. Each contains:
 	* JoJo options
 	* Name
-	* Entries array (pointing to IDs)
-	* Inputs array (containing the inputs themselves)
+	* Entries information (including the entryIDs)
+	* Form information (the form legend and the Inputs array)
 	* userId of the creator
 	* public (boolean)
 
-*************
-
-Prototypes:
-
-*************
-
-----------------
-JoJo: has meta-info about entries and contains the entries in an array.
-
-Data:
-	* The name (as inputted by user) of the JoJo
-	* Array of the inputs as Input objects
-	* Array of entries as Entry objects
-	* Meteor / Blaze template for displaying entries 
-	* Further variables (groupBy, sortBy, titleBy, rateIt) used to search, group, and sort entries
-
-Methods:
-	* displayEntries: based on the passed arguments, creates an array of entries and calls Blaze.renderWithData on the jojo's template with that 
-	
----------------
-Entry: contains information about individual entries
-
-Data:
-	* The name of the parent jojo (as represented in the Mongo collection)
-	* A unique ID for the entry
-	* The form data captured when the entry was created
-	* (Possible) other variables for displaying, grouping, sorting, and combining the entry.
-
-Methods:
-
-
------------------
-Input: stores the form inputs
-
-Data:
-	* The name of the input (equal to the prompt unless the user overrides by adding a name)
-	* The prompt 
-	* The type of input
-	* An array of how many inputs / options (will be 1 unless radio, checkbox, or select)
-	* Attributes (default values, required, etc.)

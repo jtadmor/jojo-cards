@@ -1,30 +1,33 @@
 <!-- TEMPLATE FOR CREATING NEW ENTRIES WITHIN A JOJO -->
 <template name="new_entry">
-	<div class="form-container row">
+	
+	<!-- Set the title -->
+	{{#contentFor "title"}}
+		New Entry: {{currentJoJoName}}
+	{{/contentFor}}
+
+	<div class="form-container">
 		<form id="entry-form" class="entry-form" data-abide>
 			<fieldset>
 				<legend>{{form.legend}}</legend>
 				<div class="row">
-					{{#each inputContainers}}
-						{{> entry_form_input_container}}
-					{{/each}}
 					{{#each form.inputs}}
-						{{inputDisplay}}
+						{{> input}}
 					{{/each}}
+					<div class="small-4 small-offset-8 end columns">
+						<button class="button" type="submit" id="submit-form">Submit</button>
+					</div>
 				</div>
 			</fieldset>
 		</form>
 	</div>
 </template>
 
-<!-- CONTAINER FOR INDIVIDUAL INPUTS -->
-<template name="entry_form_input_container">
-	<div class="small-12 medium-12 large-6 columns entry-form-input-container"></div>
-</template>
-
 <!-- TEMPLATE FOR INDIVIDUAL INPUTS -->
 <template name="input">
+	<div class="small-12 medium-8 large-6 end columns entry-form-input-container">
 		<label for="{{name}}">{{prompt}}</label>
-		<p>{{prompt}}</p>
-		<!-- {{{el}}} -->
+		{{{el}}}
+		{{#if required}}<small class="error">This field is required</small>{{/if}}
+	</div>
 </template>

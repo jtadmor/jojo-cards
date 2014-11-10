@@ -62,8 +62,8 @@ Template.creating_new_jojo.events(
 			# Update session
 			Session.set('newJoJoStep', 'Step Four: Advanced Settings (optional)')
 
-			# Render the template and open the modal
-			Blaze.render(Template.style_entry, $('#style-entry-modal')[0])
+			# Render the template with the data from the current jojo and open the modal
+			Blaze.renderWithData(Template.style_entry, JoJoDB.findOne(Session.get('currentJoJo')), $('#form-edit-modal')[0])
 			$('#form-edit-modal').foundation('reveal','open')
 
 	'click #customize-jojo': (e) ->
@@ -73,6 +73,6 @@ Template.creating_new_jojo.events(
 		# Reset current activity
 		Session.set('currentActivity', '')
 
-		# Empty the modals
-		$('.form-sandbox').empty()
+		# Empty the modal (shouldn't be needed now that the modals empty on close)
+		# $('.form-sandbox').empty()
 )

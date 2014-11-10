@@ -4,9 +4,6 @@ MAJOR TASKS FOR NOW:
 		☐	Event handlers for main menu clicks
 			✔	New entry	 @done (14-10-30 17:14)
 			☐	Display entries
-				☐	Change JoJo object method to return which jojos to display, rather than calling displayme on individual entries
-				☐	Show all
-				☐	Show random
 		☐	Layout for private / public jojos
 			☐	Mobile (and medium?): Separate options for private / public jojos
 			☐	Large: on load, display a list of all jojos in a div (side by side, if fit)

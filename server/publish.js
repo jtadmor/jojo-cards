@@ -15,12 +15,26 @@ Meteor.startup( function() {
 
 	// ENTRIES
 
-	// Publish all the entries for a particular jojo
+	/*
+	//Publish all the entries for a particular jojo (once entries start getting large...)
 	Meteor.publish('entries', function(jojoId) {
 		
 		// Find the jojo with jojoId, and return all entries with an _id contained in entries.entryIDs
-		return EntriesDB.find({_id: {$in: JoJoDB.findOne({_id: jojoId}).entries.entryIDs}});
+		return EntriesDB.find({_id: {$in: JoJoDB.findOne(jojoId).entries.entryIDs}});
 	});
+*/
+
+	// Publish all entries I have access to
+	// First, grab all jojos that are either public or listed under user's Id
+	// Then return all entries with an Id in any of the entryId arrays
+	Meteor.publish('accessibleEntries', function(jojoId) {
+		entries = [];
+		JoJoDB.find({$or: [{public: true}, {userId: this.userId}]}).forEach(function(doc) {
+			entries = entries.concat(doc.entries.entryIDs);
+		});
+
+		return EntriesDB.find({_id: {$in: entries}});
+	})
 
 	// USER DATA
 
@@ -31,7 +45,7 @@ Meteor.startup( function() {
 
 	// Current user, all data
 	Meteor.publish('currentUserData', function() {
-		return Meteor.users.find({_id: this.userId});
+		return Meteor.users.find(this.userId);
 	});
 
 });

@@ -3,31 +3,26 @@
 	<div class="fixed header-container off-canvas-wrap" data-offcanvas>
 		<div class="inner-wrap">
 			<nav class="tab-bar">
-				
-				<!-- Main menu area -->
-				<section class="middle tab-bar-section">
-					<!-- Display name of currentJoJo (or Sandbox) -->
-					<h1 class="title">{{> yield "title"}}</h1>
-					<!-- Display the originating user for public jojos -->
-					{{#if publicJoJoUser}}
-					<p><em>by <strong>{{publicJoJoUser}}</strong></em></p>
-					{{/if}}
-				</section>
+					
+					<!-- Main menu area -->
+					<section class="middle tab-bar-section">
+						<!-- Display name of currentJoJo (or Sandbox) -->
+						<h1 class="title">{{{jojoIcon}}} {{> yield "title"}}</h1>
+					</section>
 
-				<!-- Left menu button -->
-				<section class="left-small" id="left-off-canvas-toggler">
-					<a class="left-off-canvas-toggle menu-icon"><span></span></a>
-				</section>
-				
-				<!-- Right menu button -->
-				<section class="right-small">
-					<a class="right-off-canvas-toggle menu-icon"><span></span></a>
-				</section>
+					<!-- Left menu button -->
+					<section class="left-small">
+						<a class="left-off-canvas-toggle menu-icon"><span></span></a>
+					</section>
+					
+					<!-- Right menu button -->
+					<section class="right-small">
+						<a class="right-off-canvas-toggle menu-icon"><span></span></a>
+					</section>
 			</nav>
-
 			<!-- Left side menu  -->
-			<aside class="left-off-canvas-menu" id="entryMenu-offCanvas">
-				<ul class="off-canvas-list" >
+			<nav class="left-off-canvas-menu" id="leftMenu">
+				<ul class="off-canvas-list">
 					<li><a href="/profile">{{{jojoIcon}}} {{currentUserName}}</a></li>
 		
 					<li><label>Select A JoJo</label></li>
@@ -42,14 +37,16 @@
 							<li><label>Find a JoJo</label></li>
 								{{> public_jojo_submenu}}
 							</ul></li>
-					<li><label>{{currentJoJoName}}</label></li>
-					<li><a href="#" id="show-entries">All Entries</a></li>
-					<li><a href="#" id="random-entries">Random Entry</a></li>
+					{{#if currentJoJoId}}
+						<li><label>{{currentJoJoName}}</label></li>
+						<li><a href="#" id="show-entries">All Entries</a></li>
+						<li><a href="#" id="random-entries">Random Entry</a></li>
+					{{/if}}
 				</ul>
-			</aside>
+			</nav>
 			
 			<!-- Right side menu -->
-			<aside class="right-off-canvas-menu" id="categMenu-offCanvas">
+			<nav class="right-off-canvas-menu" id="rightMenu">
 				<ul class="off-canvas-list">
 					
 					{{#if currentJoJoId}}
@@ -58,9 +55,8 @@
 					
 					<li><a href="/createnewjojo" id="create-new-jojo">Create a JoJo</a></li>
 				</ul>
-			</aside>
-			
-		
+			</nav>
+				
 			<!-- ALL MAIN CONTENT WILL BE DISPLAYED HERE -->
 			<!-- ONE COLLUMN FOR MOBILE / SMALL / MEDIUM SCREENS -->
 			<!-- FOR LARGER SCREENS, TWO COLLUMNS TO FULLY UTILIZE FEATURES -->

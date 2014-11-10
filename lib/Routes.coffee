@@ -28,6 +28,7 @@ Router.route('/newentry/:jojoId',
 	
 	action: () -> 
 		Session.set('current_Activity', 'New Entry')
+		Session.set('currentJoJo', @params.jojoId)
 		@render('new_entry')
 )
 
