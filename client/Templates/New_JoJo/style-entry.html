@@ -1,9 +1,26 @@
 <!-- Modal / Popup: Styling entries for new jojo -->
 <template name="style_entry">
 	<div class="row">
-		<h3>Welcome to the Entry Editor.</h3>
-		<p>Hover any button for tips!</p>
+		<h3>Style entries for "{{name}}"</h3>
 	</div>
 
-	
+	<div class="entryTemplateContainer" id="entryTemplateContainer">
+		{{#each form.inputs}}
+			{{> model_entry}}
+		{{/each}}
+	</div>
+
+	<button class="button submit-styles" id="submit-styles">Done</button>
 </template>
+
+<template name="model_entry">
+	<div class="entry-container row collapse">
+		<div class="small-4 columns">
+			<div class="entry-name" data-strong="" data-em="">{{name}}:</div>
+		</div>
+		<div class="small-8 columns">
+			<div class="entry-data" data-strong="" data-em="">The <kbd>{{name}}</kbd> entry goes here</div>
+		</div>
+	</div>
+</template>
+

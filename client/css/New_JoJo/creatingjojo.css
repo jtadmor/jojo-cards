@@ -37,11 +37,7 @@ FORM CREATOR (MODAL)
 */
 
 .form-sandbox {
-
-	display: none;
-
-	top: 5vh;
-
+	
 	overflow: auto;
 
 	/*styling*/
@@ -50,7 +46,7 @@ FORM CREATOR (MODAL)
 	box-shadow: 0 0 10px 3px #007095;
 }
 
-.formTemplateContainer {
+.formTemplateContainer, .entryTemplateContainer {
 
 	overflow: auto;
 
@@ -126,3 +122,31 @@ FORM TEMPLATE CONTAINER
 	text-shadow: 3px 3px #007095 ;
 }
 
+
+
+/* 
+
+ENTRY TEMPLATE CONTAINER
+
+*/
+
+.entry-container {
+	margin: 10px;
+}
+
+.entry-name {
+	background-color: rgb(0, 112, 149);
+	color: white;
+	
+	height: 2em;
+
+	float: right;
+}
+
+.entry-data {
+	border: 2px solid rgb(0, 112, 149);
+
+	height: 2em;
+
+	float: left;
+}

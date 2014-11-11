@@ -1,4 +1,18 @@
 <!-- Template for displaying entries -->
 <template name="displaying_entries">
+	<!-- For each entry -->
+	{{#each data}}
+		{{> displayEntry}}
+	{{/each}}
+</template>
 
+<template name="entry">
+	<div class="entry-container row collapse" >
+		<div class="small-4 columns">
+			<div class="entry-name" data-strong="" data-em="" data-text="{{name}}:">{{name}}:</div>
+		</div>
+		<div class="small-8 columns">
+			<div class="entry-data" data-strong="" data-em="">The <kbd>{{name}}</kbd> entry goes here</div>
+		</div>
+	</div>
 </template>

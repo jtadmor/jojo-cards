@@ -12,3 +12,9 @@ Template.registerHelper('currentUserName', () -> Meteor.user().username or Meteo
 
 # jojoIcon: return the html string for displaying the small jojo icon
 Template.registerHelper('jojoIcon', () -> '<img class=\"small-icon\" src=\"\/images\/jojo-icon.png\">')
+
+# A helper for correctly grabbing the value of a textarea, preserving white space
+$.valHooks.textarea = {
+  get: (elem) -> 
+      elem.value.replace( /\r?\n/g, "\r\n" )
+}

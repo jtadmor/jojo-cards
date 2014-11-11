@@ -23,6 +23,9 @@ Template.new_entry.events (
 			data = Blaze.getData(this)
 
 			# If the element is a select, simple input, or textarea, the value should just be input.val()
+
+			# For textareas, define this so that it correctly grabs linebreaks:
+
 			if data.element in ["select", "input", "textarea"]
 				entry[data.name.replace(/\s/g, '_')] = $(this).find(data.element).val()
 				$(this).find(data.element).val('')
@@ -69,7 +72,7 @@ Template.input.helpers(
 	el: () ->
 
 		# Get the data and merge it with defaults
-		defaults = {name: "Input#{Template.currentData().position}", prompt: "Enter a value:", choicesCount: 0, required: "false"}
+		defaults = {name: "Input#{Template.currentData().position}", prompt: "Enter a value:", choicesCount: 0}
 		data = $.extend(defaults, Template.currentData())
 		# If there are choices, turn them into an arra
 		if data.choicesCount
@@ -82,16 +85,16 @@ Template.input.helpers(
 
 		# If simple input or textarea
 		if data.choicesCount is 0
-			htmlString += "<#{data.element} type=#{data.type} required=#{data.required} name=#{data.name}>"
+			htmlString += "<#{data.element} type=#{data.type} #{data.required} name=#{data.name}>"
 
 		# If select
 		else if data.element is 'select'
-			htmlString += "<select required=#{data.required} name=#{name}>"
+			htmlString += "<select #{data.required} name=#{name}>"
 			htmlString += "<option value='#{choice}'>#{choice}</option>" for choice in choices
 
 		# If checkbox or radio
 		else 
-			htmlString += "<#{data.element} name='#{data.name}' required=#{data.required} value='#{choice}' id='#{data.name.replace(' ','')}-#{choice}'><label for='#{data.name.replace(' ','')}-#{choice}'>#{choice}</label>" for choice in choices
+			htmlString += "<#{data.element} name='#{data.name}' #{data.required} value='#{choice}' id='#{data.name.replace(' ','')}-#{choice}'><label for='#{data.name.replace(' ','')}-#{choice}'>#{choice}</label>" for choice in choices
 
 		# Return the html
 		htmlString

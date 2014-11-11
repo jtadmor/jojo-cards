@@ -5,6 +5,7 @@ Template.create_form.events(
 	'click #save-form': () ->
 		# Grab the data elements from each input and save them under the current jojo
 		$('.display-only').each(()->
+
 			JoJoDB.update({_id: Session.get('currentJoJo')}, { $push: {'form.inputs': $(this).data()} })
 		)
 
@@ -173,7 +174,8 @@ Template.editing_input_tab_menu.events(
 
 	# Toggle input required
 	'change #set-input-required': (e)->
-		$('#being-edited').attr('data-required', e.target.checked)
+		required = if e.target.checked then 'required' else ''
+		$('#being-edited').attr('data-required', required)
 
 	# Add options to radio, checkbox, select
 	'keypress #add-input-choice': (e) ->
