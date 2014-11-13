@@ -2,6 +2,10 @@
 	margin: 2em;
 }
 
+.entry-form-input-container {
+	margin-top: 1em;
+}
+
 .form-container .button {
 
 	float: right;

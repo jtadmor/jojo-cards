@@ -5,7 +5,7 @@ Router.configure(
 
 # Data not found template
 # NOTE: NOT ACTUALLY WORKING RIGHT NOW... 
-Router.plugin('dataNotFound', {dataNotFoundTemplate: 'access_denied'});
+# Router.plugin('dataNotFound', {dataNotFoundTemplate: 'access_denied'});
 
 # Set up the template look-up convertor to return the string of the name
 Router.setTemplateNameConverter((str) -> str)
@@ -63,20 +63,17 @@ Router.route('/viewentries/:jojoId',
 	# Set the data context for the display by grabbing all the jojo entries
 	# If there are queries, grab those to figure out which entries to display
 	data: () ->
-		if @params.query is not {}
-			# Field as a string to access dot notation in Mongo
-			field = "data.#{@params.query.field}"
-			value = @params.query.value
-			# Create the query object
-			query = {}
-			query[field] = value
-			
-			# Return entries		
-			EntriesDB.find({$and: [{jojoId : @params.jojoId}, query]}).fetch()
+		# Field as a string to access dot notation in Mongo
+		field = "data.#{@params.query.field}"
+		value = @params.query.value
+		# Create the query object
+		query = {}
+		query[field] = value
 		
-		else
-			# Return entries
-			EntriesDB.find({jojoId : @params.jojoId}).fetch()
+		# Return entries		
+		EntriesDB.find({$and: [{jojoId : @params.jojoId}, query]}).fetch()
+		
+	
 
 	# Update Session and render the template
 	action: ()->

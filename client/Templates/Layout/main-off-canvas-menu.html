@@ -42,6 +42,8 @@
 						<li><a href="/viewentries/{{currentJoJoId}}">All Entries</a></li>
 						<!-- <li><a href="#" id="random-entries">Random Entry</a></li> -->
 					{{/if}}
+					<li class="divider"></li>
+					<li><a id="user-logout" class="button">Logout</a></li>
 				</ul>
 			</nav>
 			
@@ -77,11 +79,14 @@
 <!-- Selecting from your private jojos -->
 <template name = "select_jojo_submenu">
 	{{#each jojos}}
-		<li><a href="/jojo/{{this._id}}" class="activateJoJo" data-id="{{this._id}}">{{this.name}}</a></li>
+		<li><a href="/jojo/{{this._id}}" class="activateJoJo">{{this.name}}</a></li>
 	{{/each}}
 </template>
 
 <!-- Fill this in -->
 <template name = "public_jojo_submenu">
-	<!-- Ideas: text search, most popular / now trending, your favorites, your most submitted -->
+	<!-- Soon to replaced with options to search by name, most popular, your favorites, trending -->
+	{{#each jojos}}
+		<li><a href="/jojo/{{this._id}}" class="activateJoJo">{{this.name}}</a></li>
+	{{/each}}
 </template>

@@ -12,7 +12,12 @@ Events and handlers for:
 
 Template.main_off_canvas_menu.helpers()
 
-Template.main_off_canvas_menu.events()
+Template.main_off_canvas_menu.events(
+
+# Logout
+	'click #user-logout': () ->
+		Meteor.logout()
+)
 
 # On render, load foundation
 Template.main_off_canvas_menu.rendered = () -> 
@@ -33,13 +38,11 @@ Template.select_jojo_submenu.helpers(
 		JoJoDB.find({userId: Meteor.userId(), public: false})
 )
 
-Template.select_jojo_submenu.events(
-
-	# When activiating a jojo, set it to the currently active jojo, reset activity, route home
-	'click .activateJoJo': (e) ->
-		Session.set('currentJoJo', $(e.target).data('id'))
-		Session.set('currentActivity', '')
-)
-
 # SELECTING / SEARCHING PUBLIC JOJOS 
-Template.public_jojo_submenu.helpers({})
+Template.public_jojo_submenu.helpers(
+
+	# Get all of the public jojos
+	jojos: () ->
+		JoJoDB.find({public: true})
+
+)

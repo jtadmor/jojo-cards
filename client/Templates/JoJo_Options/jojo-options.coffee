@@ -34,19 +34,16 @@ Template.jojo_options.events(
 				console.log err
 			else 
 				# Grab all the entries (without _id), and for each insert a new copy into EntriesDB
-				console.log 'Entries', JoJoDB.findOne(jojoId, {fields: {'entries.entryIDs': 1, _id: 0}}).entries.entryIDs
 				EntriesDB.find({_id: {$in: JoJoDB.findOne(jojoId, {fields: {'entries.entryIDs': 1}}).entries.entryIDs }}).forEach( 
 					(entry) ->
-						EntriesDB.insert(_.omit(entry, '_id'), (error, entryId) ->
+						EntriesDB.insert({jojoId: jojoId, data: entry.data}, (error, entryId) ->
 							if err
 								console.log err
 							else
-								console.log('entry', entry)
-								console.log('original entry id', entry._id)
 								# Update the JoJo to include a reference to new entry, update entry to point to public jojo
 								JoJoDB.update(jojoId, {$push: {'entries.entryIDs': entryId}, $set: {public: true}})
 								JoJoDB.update(jojoId, {$pull: {'entries.entryIDs': entry._id}})
-								EntriesDB.update(entryId, {$set: {jojoId: jojoId}})
+								# EntriesDB.update(entryId, {$set: {jojoId: jojoId}})
 							null
 						)
 						# Return line for the forEach

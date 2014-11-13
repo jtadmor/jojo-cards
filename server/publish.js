@@ -14,8 +14,6 @@ Meteor.startup( function() {
 	});
 
 	// ENTRIES
-
-	
 	//Publish all the entries for a particular jojo (once entries start getting large...)
 	Meteor.publish('jojoEntries', function(jojoId) {
 		
@@ -42,12 +40,30 @@ Meteor.startup( function() {
 		
 		var publishNew = EntriesDB.find({}).observe({
 
+			// When added, tell client that there is an added one
 			added: function(entry) {
 				var jojo = JoJoDB.findOne(entry.jojoId);
 				if (jojo && (jojo.public || jojo.userId === self.userId)) {
-					self.added('entries', entry._id, {data: entry.data, jojoId: entry.jojoId})
+					self.added('entries', entry._id, {data: entry.data, jojoId: entry.jojoId});
+				}
+			},
+
+			// When changed, ditto
+			changed: function(entry) {
+				var jojo = JoJoDB.findOne(entry.jojoId);
+				if (jojo && (jojo.public || jojo.userId === self.userId)) {
+					self.changed('entries', entry._id, {jojoId: entry.jojoId});
+				}
+			},
+
+			// When removed, ditto
+			removed: function(entry) {
+				var jojo = JoJoDB.findOne(entry.jojoId);
+				if (jojo && (jojo.public || jojo.userId === self.userId)) {
+					self.removed('entries', entry._id);
 				}
 			}
+
 		}); 
 
 		self.ready();
