@@ -14,6 +14,9 @@ Template.create_form.events(
 
 		# Close the modal and empty it
 		$('#form-edit-modal').empty().foundation('reveal','close')
+
+		# TEMPORARY - REROUTE THE USER
+		Router.go("/newentry/#{Session.get('currentJoJo')}")
 )
 
 Template.create_form.helpers(

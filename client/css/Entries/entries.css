@@ -1,0 +1,44 @@
+/*
+
+STYLING FOR THE DISPLAYING OF ENTRIES
+
+
+*/
+
+
+.entry-display-container {
+
+	margin: 2em .5em;
+	padding: .5em;
+
+	font-size: 1.5em;
+
+	border-radius: 10px;
+	border: 2px solid #007095;
+	box-shadow: 0 0 10px 3px #007095;
+
+	background-color: lightgray
+}
+
+.field-container {
+	
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+
+}
+
+
+.entry-display-name {
+
+	flex: 1 1 auto;
+	padding: .25em;
+	
+}
+
+.entry-display-data {
+	
+	flex: 1 1 auto;
+	padding: .25em;
+}

@@ -44,7 +44,7 @@ Meteor.startup( function() {
 
 			added: function(entry) {
 				var jojo = JoJoDB.findOne(entry.jojoId);
-				if (jojo.public || jojo.userId === self.userId) {
+				if (jojo && (jojo.public || jojo.userId === self.userId)) {
 					self.added('entries', entry._id, {data: entry.data, jojoId: entry.jojoId})
 				}
 			}

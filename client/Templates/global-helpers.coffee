@@ -13,6 +13,13 @@ Template.registerHelper('currentUserName', () -> Meteor.user().username or Meteo
 # jojoIcon: return the html string for displaying the small jojo icon
 Template.registerHelper('jojoIcon', () -> '<img class=\"small-icon\" src=\"\/images\/jojo-icon.png\">')
 
+# publicJoJoUser: return the name of the user that originated a public user
+Template.registerHelper('publicJoJoUser', () -> 
+		if JoJoDB.findOne(Session.get("currentJoJo"))?.public
+			user = Meteor.users.findOne( (JoJoDB.findOne(Session.get("currentJoJo")).userId) )
+			user.username or user.profile.name
+)
+
 # A helper for correctly grabbing the value of a textarea, preserving white space
 $.valHooks.textarea = {
   get: (elem) -> 

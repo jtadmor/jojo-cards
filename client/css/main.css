@@ -37,3 +37,6 @@ GLOBAL STYLES FOR ICONS, FONTS, ...
 	font-family: 'Dancing Script', cursive;
 }
 
+body * {
+	font-family: 'Nunito', sans-serif;
+}

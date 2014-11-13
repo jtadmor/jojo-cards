@@ -1,5 +1,6 @@
 <!-- Modal / Popup: Creating the form for a new JoJo -->
 <template name = "create_form">
+	
 	<div class="row">
 		<h3>Welcome to the Form Creator.</h3>
 		<p>Hover any button for tips!</p>
@@ -59,14 +60,14 @@
 <!-- Template for the input editing tab menu -->
 <template name="editing_input_tab_menu">
 	<dl class="tabs" data-tab>
-		<dd class><a href="#input-options-tab">Basics</a></dd>
+		<dd class="option-tab"><a href="#input-options-tab">Basics</a></dd>
 		{{#if input}}
-			<dd><a href="#input-type-tab">Input Type</a></dd>
+			<dd class="option-tab"><a href="#input-type-tab">Input Type</a></dd>
 		{{/if}}
 		{{#if addOptions}}
-			<dd><a href="#edit-choices-tab">Choices</a></dd>
+			<dd class="option-tab"><a href="#edit-choices-tab">Choices</a></dd>
 		{{/if}}
-		<dd><a href="#done-editing" id="close-tab-menu">Done</a></dd>
+		<dd class="option-tab"><a href="#done-editing" id="close-tab-menu">Done</a></dd>
 	</dl>
 
 	<!-- Changing the input options -->

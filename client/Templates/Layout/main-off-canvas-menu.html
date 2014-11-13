@@ -39,8 +39,8 @@
 							</ul></li>
 					{{#if currentJoJoId}}
 						<li><label>{{currentJoJoName}}</label></li>
-						<li><a href="#" id="show-entries">All Entries</a></li>
-						<li><a href="#" id="random-entries">Random Entry</a></li>
+						<li><a href="/viewentries/{{currentJoJoId}}">All Entries</a></li>
+						<!-- <li><a href="#" id="random-entries">Random Entry</a></li> -->
 					{{/if}}
 				</ul>
 			</nav>
@@ -53,7 +53,7 @@
 						<li><a href="/newentry/{{currentJoJoId}}">New Entry</a></li>
 					{{/if}}
 					
-					<li><a href="/createnewjojo" id="create-new-jojo">Create a JoJo</a></li>
+					<li><a href="/createnewjojo">Create a JoJo</a></li>
 				</ul>
 			</nav>
 				
@@ -77,7 +77,7 @@
 <!-- Selecting from your private jojos -->
 <template name = "select_jojo_submenu">
 	{{#each jojos}}
-		<li><a class="activateJoJo" data-id="{{this._id}}">{{this.name}}</a></li>
+		<li><a href="/jojo/{{this._id}}" class="activateJoJo" data-id="{{this._id}}">{{this.name}}</a></li>
 	{{/each}}
 </template>
 

@@ -3,6 +3,10 @@ Router.configure(
 	layoutTemplate: 'layout'
 )
 
+# Data not found template
+# NOTE: NOT ACTUALLY WORKING RIGHT NOW... 
+Router.plugin('dataNotFound', {dataNotFoundTemplate: 'access_denied'});
+
 # Set up the template look-up convertor to return the string of the name
 Router.setTemplateNameConverter((str) -> str)
 
@@ -13,6 +17,7 @@ Router.route('/',
 	name: 'home'
 	action: () ->
 		Session.set('currentActivity', 'Welcome')
+		Session.set('currentJoJo', '')
 		@render()
 )
 
@@ -27,7 +32,7 @@ Router.route('/newentry/:jojoId',
 		JoJoDB.findOne({_id: @params.jojoId})
 	
 	action: () -> 
-		Session.set('current_Activity', 'New Entry')
+		Session.set('currentActivity', 'New Entry')
 		Session.set('currentJoJo', @params.jojoId)
 		@render('new_entry')
 )
@@ -42,6 +47,7 @@ Router.route('/createnewjojo',
 		@render('creating_new_jojo')
 )
 
+# Viewing (and editing) a profile
 Router.route('/profile',
 	name: 'profile'
 	action: () ->
@@ -50,4 +56,49 @@ Router.route('/profile',
 		@render('profile')
 )
 
-# For the viewing entries router, subscribe to the entries by passing the jojoid, then use waitOn to make sure the subscription is ready
+# Viewing jojo entries
+Router.route('/viewentries/:jojoId',
+	name: 'displaying_entries'
+
+	# Set the data context for the display by grabbing all the jojo entries
+	# If there are queries, grab those to figure out which entries to display
+	data: () ->
+		if @params.query is not {}
+			# Field as a string to access dot notation in Mongo
+			field = "data.#{@params.query.field}"
+			value = @params.query.value
+			# Create the query object
+			query = {}
+			query[field] = value
+			
+			# Return entries		
+			EntriesDB.find({$and: [{jojoId : @params.jojoId}, query]}).fetch()
+		
+		else
+			# Return entries
+			EntriesDB.find({jojoId : @params.jojoId}).fetch()
+
+	# Update Session and render the template
+	action: ()->
+		Session.set('currentActivity', 'Viewing Entries')
+		Session.set('currentJoJo', @params.jojoId)
+		@render('displaying_entries')
+
+)
+
+# Viewing a jojo (and changing options / making public or private)
+Router.route('/jojo/:jojoId',
+	name: 'jojo_options'
+
+	# Return the jojo
+	data: () ->
+		JoJoDB.findOne(@params.jojoId)
+
+	# Update Session, render the template
+	action: ()->
+		Session.set('currentActivity', 'Viewing JoJo')
+		Session.set('currentJoJo', @params.jojoId)
+		@render('jojo_options')
+)
+
+

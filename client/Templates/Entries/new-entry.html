@@ -3,7 +3,7 @@
 	
 	<!-- Set the title -->
 	{{#contentFor "title"}}
-		New Entry: {{currentJoJoName}}
+		New Entry: "{{currentJoJoName}}"
 	{{/contentFor}}
 
 	<div class="form-container">
@@ -14,12 +14,14 @@
 					{{#each form.inputs}}
 						{{> input}}
 					{{/each}}
-					<div class="small-4 small-offset-8 end columns">
-						<button class="button" type="submit" id="submit-form">Submit</button>
-					</div>
+					<button class="button" type="submit" id="submit-form">Submit</button>
 				</div>
 			</fieldset>
 		</form>
+	</div>
+
+	<!-- The container for new entries -->
+	<div id="recent-entry-container">
 	</div>
 </template>
 
@@ -28,6 +30,6 @@
 	<div class="small-12 medium-8 large-6 end columns entry-form-input-container">
 		<label for="{{name}}">{{prompt}}</label>
 		{{{el}}}
-		{{#if required}}<small class="error">This field is required</small>{{/if}}
+		{{#if required}}<small class="error">Enter a valid value.</small>{{/if}}
 	</div>
 </template>

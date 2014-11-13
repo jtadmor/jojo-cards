@@ -66,6 +66,10 @@ FORM CREATOR (MODAL)
 	margin-top: 20px;
 }
 
+.tabs .option-tab>a{
+	padding: 1em 1.5em;
+}
+
 /* 
 
 FORM TEMPLATE CONTAINER
@@ -149,4 +153,20 @@ ENTRY TEMPLATE CONTAINER
 	height: 2em;
 
 	float: left;
+}
+
+
+/*
+
+STYLE EDITOR
+
+*/
+
+
+
+.submit-styles {
+
+	float: right;
+
+	margin: 10px;
 }

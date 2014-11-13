@@ -27,12 +27,12 @@ Template.new_entry.events (
 			# For textareas, define this so that it correctly grabs linebreaks:
 
 			if data.element in ["select", "input", "textarea"]
-				entry[data.name.replace(/\s/g, '_')] = $(this).find(data.element).val()
+				entry[data.name.replace(/[\s-.@#$%^&*.,<>]/g, '_')] = $(this).find(data.element).val()
 				$(this).find(data.element).val('')
 
 			# If the element is a radio, the value is the selected val
 			else if data.element.match(/radio/)
-				entry[data.name.replace(/\s/g, '_')] = $(this).find('input:checked').val()
+				entry[data.name.replace(/[\s-.@#$%^&*.,<>]/g, '_')] = $(this).find('input:checked').val()
 				$(this).find('input:checked').prop('checked', false)
 
 			# For a checkbox, value is a comma-separated list of the selected values 
@@ -43,7 +43,7 @@ Template.new_entry.events (
 					checkedValues.push( $(this).val() )
 					$(this).prop('checked', false)
 				)
-				entry[data.name.replace(/\s/g, '_')] = checkedValues.join(', ')
+				entry[data.name.replace(/[\s-.@#$%^&*.,<>]/g, '_')] = checkedValues.join(', ')
 			)
 
 		# Insert the entry into the EntriesDB object, with a callback that adds the _id of the new entry into the entryIDs array of the current jojo
@@ -57,9 +57,9 @@ Template.new_entry.events (
 				JoJoDB.update(Session.get('currentJoJo'), {$push: {'entries.entryIDs': _id}})
 		)
 
-		# Display the most recent post
-
-		# Blaze.renderWithData(...)
+		# Display the most recent post, clearing out any prior ones if they exist
+		$('#recent-entry-container').empty()
+		Blaze.renderWithData(Template.entry, entry, $('#recent-entry-container')[0])
 
 		null
 )

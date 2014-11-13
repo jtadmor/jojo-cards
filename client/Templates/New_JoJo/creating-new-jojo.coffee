@@ -41,10 +41,11 @@ Template.creating_new_jojo.events(
 						console.log(id)
 						Session.set('currentJoJo', id)
 				)
-		# No key press once the name is submitted
+		# Once the name is submitted, hitting enter will change the name of the JoJo
 		else
-			e.preventDefault()
-
+			if e.which is 13
+				e.preventDefault()
+				JoJoDB.update({_id: Session.get('currentJoJo')}, {$set: {name: $(e.target).val()}})
 
 	# Move up a step and open the create form modal
 	'click #create-form': (e) ->

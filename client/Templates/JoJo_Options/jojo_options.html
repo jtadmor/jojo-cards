@@ -1,0 +1,38 @@
+<template name="jojo_options">
+	
+	<!-- Set title -->
+	{{#contentFor "title"}}
+		Viewing JoJo: "{{currentJoJoName}}"
+	{{/contentFor}}
+
+	<!-- The options -->
+	<div class="jojo-options-container">
+		<!-- Set up the options accordion -->
+		<dl class="accordion" data-accordion>
+		<!-- Display either the make private or make public buttons -->
+		{{#if publicJoJo}}
+			<dd class="accordion-navigation">
+				<a href="#make-private-panel">Copy JoJo to My JoJos</a>
+				<div id="make-private-panel" class="content">
+					<button class="button small" id="make-private-form-only">Copy Form Only</button>
+					<button class="button small" id="make-private-copy-entries">Copy Form and Entries</button>
+				</div>
+			</dd>
+		{{else}}
+			<dd class="accordion-navigation">
+				<a href="#make-public-panel">Make JoJo Public</a>
+				<div id="make-public-panel" class="content">
+					<button class="button small" id="make-public-form-only">Publish Form Only</button>
+					<button class="button small" id="make-public-copy-entries">Publish Form and Entries</button>
+				</div>
+			</dd>
+		{{/if}}
+			<dd class="accordion-navigation">
+				<a href="#edit-jojo-panel">Edit JoJo</a>
+				<div id="edit-jojo-panel" class="content">
+					<h3 class="dancing-script">Coming soon!</h3>
+				</div>
+			</dd>
+		</dl>
+	</div>
+</template>

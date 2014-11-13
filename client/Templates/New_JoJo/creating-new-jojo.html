@@ -1,5 +1,11 @@
 <!-- Bring up the options for creating a new jojo -->
 <template name="creating_new_jojo">
+	
+	<!-- Set the title -->
+	{{#contentFor "title"}}
+		Creating New JoJo{{#if currentJoJoName}}: {{currentJoJoName}}{{/if}}
+	{{/contentFor}}
+
 	<div class="newJoJo-stepsContainer">
 		<!-- Display the step information -->
 		<h3 class="indie-flower">{{newJoJoStep}}</h3>

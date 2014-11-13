@@ -1,18 +1,33 @@
 <!-- Template for displaying entries -->
 <template name="displaying_entries">
+	<!-- Set the title -->
+	{{#contentFor "title"}}
+		Displaying Entries: "{{currentJoJoName}}"
+	{{/contentFor}}
+	
 	<!-- For each entry -->
 	{{#each data}}
-		{{> displayEntry}}
+		{{> entry}}
 	{{/each}}
 </template>
 
+<!-- Individual entries -->
+<!-- EDIT TO INCLUDE STYLING -->
 <template name="entry">
-	<div class="entry-container row collapse" >
-		<div class="small-4 columns">
-			<div class="entry-name" data-strong="" data-em="" data-text="{{name}}:">{{name}}:</div>
-		</div>
-		<div class="small-8 columns">
-			<div class="entry-data" data-strong="" data-em="">The <kbd>{{name}}</kbd> entry goes here</div>
-		</div>
+	<div class="entry-display-container">
+		{{#each fieldObj}}
+			{{> field}}
+		{{/each}}
+		
+		<div class="sub-entry-container"></div>
+
+		<!-- Add buttons, ratings, etc. -->
+	</div>
+</template>
+
+<template name="field">
+	<div class="field-container">
+		<div class="entry-display-name"><strong>{{pre}}</strong></div>
+		<div class="entry-display-data" data-source="{{field}}"><em>{{value}}</em></div>
 	</div>
 </template>

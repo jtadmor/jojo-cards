@@ -10,21 +10,9 @@ Events and handlers for:
 
 #  -------------- MAIN MENU ------------------
 
-Template.main_off_canvas_menu.helpers(
+Template.main_off_canvas_menu.helpers()
 
-	# if the current jojo is public, the user who created it
-	publicJoJoUser: () -> 
-		if JoJoDB.findOne(Session.get("currentJoJo"))?.public
-			user = Meteor.users.findOne( (JoJoDB.findOne(Session.get("currentJoJo")).userId) )
-			user.username or user.profile.name
-
-	home: () ->
-		Session.equals('currentActivity', 'Welcome')
-
-)
-
-Template.main_off_canvas_menu.events(
-)
+Template.main_off_canvas_menu.events()
 
 # On render, load foundation
 Template.main_off_canvas_menu.rendered = () -> 
@@ -44,8 +32,6 @@ Template.select_jojo_submenu.helpers(
 	jojos: () -> 
 		JoJoDB.find({userId: Meteor.userId(), public: false})
 )
-
-
 
 Template.select_jojo_submenu.events(
 
