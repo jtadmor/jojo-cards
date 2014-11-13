@@ -18,7 +18,7 @@ MAIN MENU
 
 /*
 
-LOGIN POPUP
+LOGIN CONTAINER
 
 
 Note: must style with ID to override defaults from Foundation / Meteor (not even sure which...)
@@ -28,9 +28,26 @@ Note: must style with ID to override defaults from Foundation / Meteor (not even
 
 .login-container {
 	
-	width: 10em;
-	margin: 0 auto;
+	/*width: 80vw;
+	margin: 5vh auto;
+	height: 50vh;*/
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
 }
+
+.login-container h1 {
+
+	text-align: center;
+}
+
+.login-container button {
+
+	margin-top: 1em;
+}
+
 
 /*  Change the appearance of the text */
 #login-buttons a.login-link-text {

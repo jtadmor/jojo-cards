@@ -4,9 +4,10 @@
 		{{#if currentUser}}
 				{{> main_off_canvas_menu}}
 		{{else}}
-		<img id="jojo-icon" src="images/jojo-icon.png">
 		<div class="login-container">
-				<button>{{> loginButtons}}</button>
+			<h1 class="dancing-script">Welcome to JoJo!<br> Login and get started!</h1>
+			<img id="jojo-icon" src="images/jojo-icon.png">
+			<button>{{> loginButtons}}</button>
 		</div>
 		{{/if}} 
 </template>
