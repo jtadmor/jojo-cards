@@ -1,10 +1,15 @@
 .jojo-options-container {
 
 	margin: 2em;
-	height: 50vh;
+/*	height: 50vh;
 	border-radius: 10px;
 	border: 2px solid #007095;
 	box-shadow: 0 0 10px 3px #007095;
 
-	padding: 1em;
+	padding: 1em;*/	
+}
+
+
+.jojo-trick-select {
+	margin: 1em 0;
 }

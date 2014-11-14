@@ -9,13 +9,19 @@ Template.jojo_options.helpers(
 	'publicJoJo': () ->
 		ispublic = if JoJoDB.findOne(@).public then true else false
 		ispublic
+
+	'nameFixed': () ->
+		@.name.replace(/[\s-.@#$%^&*.,<>]/g, '_')
+
+	'myjojos': ()->
+		#  Return all the user's jojos except the currently active one
+		JoJoDB.find({userId: Meteor.userId(), _id: {$ne: Session.get('currentJoJo')}})
 )
 
 Template.jojo_options.events(
 
 	# Create new public jojos with out entries
 	'click #make-public-form-only': () ->
-		console.log JoJoDB.findOne(@, {fields: {_id: 0}})
 		# Find the current jojo, and insert a copy of it into the database, without its _id, then update to make public remove the entries
 		JoJoDB.insert(JoJoDB.findOne(@, {fields: {_id: 0}}),
 			(err, id) ->
@@ -53,4 +59,21 @@ Template.jojo_options.events(
 			# Return line for the insert	
 			null
 		)
+
+		# # Learn a new trick by field
+		# 'click #pin-by-field': () ->
+		# 	# Get needed values and set up a blank query
+		# 	field = $('#field-to-combine').val()
+		# 	targetjojoid = $('#jojo-to-combine').val()
+		# 	query = {}
+
+		# 	# Go through each entry in the current jojo
+		# 	pinTo = EntriesDB.find({_id: {$in: JoJoDB.findOne(Session.get('currentJoJo')).entries.entryIDs}).map((entry)->
+		# 		# Find this entry's match in the other jojo, only publish the ID for any that are found
+		# 		query[field] = entry[field]
+		# 		EntriesDB.find({$and: [{jojoId: targetjojoid}, query]}, {fields: {_id: 1}}).fetch()
+		# 	)
+
+		# 	console.log(pinTo)
+		# 	null
 )

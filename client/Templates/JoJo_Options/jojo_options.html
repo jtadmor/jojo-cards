@@ -10,25 +10,77 @@
 		<!-- Set up the options accordion -->
 		<dl class="accordion" data-accordion>
 		<!-- Display either the make private or make public buttons -->
+
 		{{#if publicJoJo}}
+		<!-- Make private -->
 			<dd class="accordion-navigation">
-				<a href="#make-private-panel">Copy JoJo to My JoJos</a>
+				<a href="#make-private-panel">Copy <span class="indie-flower">{{currentJoJoName}}</span> to My JoJos</a>
 				<div id="make-private-panel" class="content">
 					<button class="button small" id="make-private-form-only">Copy Form Only</button>
 					<button class="button small" id="make-private-copy-entries">Copy Form and Entries</button>
 				</div>
 			</dd>
+
 		{{else}}
+		<!-- Make Public -->
 			<dd class="accordion-navigation">
-				<a href="#make-public-panel">Make JoJo Public</a>
+				<a href="#make-public-panel">Make <span class="indie-flower">{{currentJoJoName}}</span> Public</a>
 				<div id="make-public-panel" class="content">
 					<button class="button small" id="make-public-form-only">Publish Form Only</button>
 					<button class="button small" id="make-public-copy-entries">Publish Form and Entries</button>
 				</div>
 			</dd>
-		{{/if}}
+
+			<!-- Learn tricks -->
 			<dd class="accordion-navigation">
-				<a href="#edit-jojo-panel">Edit JoJo</a>
+				<a href="#learn-tricks-panel">Teach <span class="indie-flower">{{currentJoJoName}}</span> a Trick!</a>
+				<div id="learn-tricks-panel" class="content">
+					
+					<!-- TAB BAR FOR TRICKS -->
+					<dl class="tabs" data-tab>
+		        <dd><a href="#field-trick-panel">By Field</a></dd>
+		        <dd><a href="#content-trick-panel">By Content</a></dd>
+		        <!-- <dd><a href="#panel2-3">Tab 3</a></dd> -->
+		        <!-- <dd><a href="#panel2-4">Tab 4</a></dd> -->
+		      </dl>
+		      <div class="tabs-content">
+		        <div class="content" id="field-trick-panel">
+
+		          <!-- Drop down selector for the field -->
+		          <label>Combine Field:</label>
+		          <select class="jojo-trick-select" id="field-to-combine">
+		          {{#each form.inputs}}
+		          	<option val="{{nameFixed}}">{{name}}</option>
+		          {{/each}}
+							</select>
+
+							<!-- Drop down selector for the other jojo -->
+							<label>Combine With:</label>
+		          <select id="jojo-to-combine" class="jojo-trick-select">
+		          {{#each myjojos}}
+		          	<option val="{{_id}}">{{name}}</option>
+		          {{/each}}
+							</select>
+
+							<button class="button" id="pin-by-field">Learn</button>
+		        </div>
+		        <div class="content" id="content-trick-panel">
+		          <h3 class="dancing-script">Coming soon!</h3>
+		        </div>
+		        <!-- <div class="content" id="panel2-3">
+		          <p>Third panel content goes here...</p>
+		        </div>
+		        <div class="content" id="panel2-4">
+		          <p>Fourth panel content goes here...</p>
+		        </div> -->
+		      </div>
+				</div>
+			</dd>
+		{{/if}}
+
+		<!-- Edit Options -->
+			<dd class="accordion-navigation">
+				<a href="#edit-jojo-panel">Edit <span class="indie-flower">{{currentJoJoName}}</span></a>
 				<div id="edit-jojo-panel" class="content">
 					<h3 class="dancing-script">Coming soon!</h3>
 				</div>
