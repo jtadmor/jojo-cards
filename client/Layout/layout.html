@@ -1,0 +1,80 @@
+<!-- Top-nav bar containing welcome message, login-dropdown, and the site logo -->
+<template name="layout">	
+	<!-- Div to hold the menu -->
+		{{#if currentUser}}
+			{{> main_off_canvas_menu}}
+		{{else}}
+		<div class="welcome-options-container">
+			<h1 class="dancing-script">Welcome to JoJo!</h1>
+			<img id="jojo-icon" src="images/jojo-icon.png">
+
+			<!-- Accordion for Information -->
+			<dl class="accordion" data-accordion>
+				<dd class="accordion-navigation">
+					<a href="#information" class="button">About JoJo</a>
+					<!-- Panels explaining what jojo is -->
+					<div class="content" id="information">
+						<div class="row" data-equalizer>
+							<div class="small-12 medium-6 columns">
+								<div class="panel callout" data-equalizer-watch>
+									<h1 class="dancing-script">JoJo:</h1>
+									<p>Here to help you share your interests and organize your life.</p>
+									{{{jojoIcon}}}
+								</div>
+							</div>
+							<div class="small-12 medium-6 columns">
+								<div class="panel" data-equalizer-watch>
+									<h3 class="dancing-script">The Big Idea:</h3>
+									<p><span class="indie-flower">JoJo</span> is all about letting you decide what information you want. Take it with you, teach it tricks, and watch it grow.</p>
+								</div>
+							</div>
+						</div>
+
+						<div class="row" data-equalizer>
+							<div class="small-12 medium-6 columns">
+								<div class="panel" data-equalizer-watch>
+									<h1 class="dancing-script">So... what's a jojo?</h1>
+									<p>Think of it as a category or an interest. Like a contacts book, a list of great restaraunts, or characters in a book you're working on. The sky's the limit.</p>
+								</div>
+							</div>
+							<div class="small-12 medium-6 columns">
+								<div class="panel" data-equalizer-watch>
+									<h1 class="dancing-script">How do they work?</h1>
+									<p>Create a <span class="indie-flower">jojo</span>, tell it exactly what information you want and how you want to view it. Get the <span class="indie-flower">jojo</span> spinning by creating entries. Keep it private, share it with friends, or make it public!</p>
+								</div>
+							</div>
+						</div>
+
+						<div class="row" data-equalizer>
+							<div class="small-12 medium-6 columns">
+								<div class="panel" data-equalizer-watch>
+									<h1 class="dancing-script">Can they do tricks?</h1>
+									<p>You bet! <span class="indie-flower">jojo</span>s are made to be easily grouped and searched. Even cooler, you can pin relevant information from one <span class="indie-flower">jojo</span> to entries in another! Now your appointment with your best friend at that new restaraunt can all be in one place.</p>
+								</div>
+							</div>
+							<div class="small-12 medium-6 columns">
+								<div class="panel" data-equalizer-watch>
+									<h1 class="dancing-script">Around the world.</h1>
+									<p><span class="indie-flower">JoJo</span> is designed for the modern world. It fits nicely in your pocket, and can do some really neat tricks when given room. No matter what, the information you need is there, at your fingertips.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</dd>
+				<dd class="accordion-navigation">
+					<a href="#user-login" class="button">Log In</a>
+					<div class="content" id="user-login">
+					</div>
+				</dd>	
+				<dd class="accordion-navigation">
+					<a href="#create-account" class="button">Create Account</a>
+					<div class="content" id="create-account">
+					</div>
+				</dd>
+			</dl>
+			<form>
+				<input name="username">
+			<!-- <button>{{> loginButtons}}</button> -->
+		</div>
+		{{/if}} 
+</template>

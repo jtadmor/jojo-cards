@@ -26,7 +26,7 @@ Note: must style with ID to override defaults from Foundation / Meteor (not even
 
 /* Add margin to the button  */
 
-.login-container {
+.welcome-options-container {
 	
 	/*width: 80vw;
 	margin: 5vh auto;
@@ -38,12 +38,12 @@ Note: must style with ID to override defaults from Foundation / Meteor (not even
 	align-items: center;
 }
 
-.login-container h1 {
+.welcome-options-container h1 {
 
 	text-align: center;
 }
 
-.login-container button {
+.welcome-options-container button {
 
 	margin-top: 1em;
 }
