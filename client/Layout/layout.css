@@ -43,11 +43,11 @@ Note: must style with ID to override defaults from Foundation / Meteor (not even
 	text-align: center;
 }
 
-.welcome-options-container button {
+/*.welcome-options-container button {
 
 	margin-top: 1em;
 }
-
+*/
 
 /*  Change the appearance of the text */
 #login-buttons a.login-link-text {

@@ -4,11 +4,17 @@
 		{{#if currentUser}}
 			{{> main_off_canvas_menu}}
 		{{else}}
-		<div class="welcome-options-container">
-			<h1 class="dancing-script">Welcome to JoJo!</h1>
-			<img id="jojo-icon" src="images/jojo-icon.png">
+			<div class="welcome-options-container">
+				<h1 class="dancing-script">Welcome to JoJo!</h1>
+				<img id="jojo-icon" src="images/jojo-icon.png">
 
-			<!-- Accordion for Information -->
+				{{>accordion_menu}}
+			</div>
+		{{/if}} 
+</template>
+
+<template name="accordion_menu">
+<!-- Accordion for Information -->
 			<dl class="accordion" data-accordion>
 				<dd class="accordion-navigation">
 					<a href="#information" class="button">About JoJo</a>
@@ -62,19 +68,25 @@
 					</div>
 				</dd>
 				<dd class="accordion-navigation">
-					<a href="#user-login" class="button">Log In</a>
-					<div class="content" id="user-login">
+					<a href="#user-login-tab" class="button">Log In</a>
+					<div class="content" id="user-login-tab">
+						<form id="user-login-form">
+							<input required type="e-mail" name="username" placeholder="Enter Username or E-mail">
+							<input required type="password" name="password" placeholder="Enter Password">
+						</form>
 					</div>
 				</dd>	
 				<dd class="accordion-navigation">
-					<a href="#create-account" class="button">Create Account</a>
-					<div class="content" id="create-account">
+					<a href="#create-account-tab" class="button">Create Account</a>
+					<div class="content" id="create-account-tab">
+						<form id="create-account-form">
+							<input required type="e-mail" name="username" placeholder="Enter E-mail Address">
+							<input required type="password" name="password" placeholder="Choose a password">
+							<input required type="password" name="confirm-password" placeholder="Confirm password">
+						</form>
 					</div>
 				</dd>
 			</dl>
-			<form>
-				<input name="username">
+			
 			<!-- <button>{{> loginButtons}}</button> -->
-		</div>
-		{{/if}} 
 </template>

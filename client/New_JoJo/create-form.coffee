@@ -148,7 +148,7 @@ On rendering the template:
 Template.editing_input_tab_menu.rendered = () ->
 
 	# Intialize foundation
-	$('#tab-menu-holder').foundation()
+	$('#tab-menu-holder').foundation
 	
 	# Save the view and the index
 	temp = this.view

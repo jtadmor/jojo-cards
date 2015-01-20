@@ -4,7 +4,7 @@
 
 # On render, initialize foundation on that sucka
 Template.new_entry.rendered = () ->
-	$('#entry-form').foundation() 
+	$('#entry-form').foundation()
 
 Template.new_entry.events (
 
