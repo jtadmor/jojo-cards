@@ -20,8 +20,6 @@ MAIN MENU
 
 LOGIN CONTAINER
 
-
-Note: must style with ID to override defaults from Foundation / Meteor (not even sure which...)
 */
 
 /* Add margin to the button  */
@@ -43,17 +41,6 @@ Note: must style with ID to override defaults from Foundation / Meteor (not even
 	text-align: center;
 }
 
-/*.welcome-options-container button {
 
-	margin-top: 1em;
-}
-*/
-
-/*  Change the appearance of the text */
-#login-buttons a.login-link-text {
-
-	text-decoration: none;
-	color: white;
-}
 
 

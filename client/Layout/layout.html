@@ -1,92 +1,96 @@
 <!-- Top-nav bar containing welcome message, login-dropdown, and the site logo -->
 <template name="layout">	
-	<!-- Div to hold the menu -->
-		{{#if currentUser}}
-			{{> main_off_canvas_menu}}
-		{{else}}
-			<div class="welcome-options-container">
-				<h1 class="dancing-script">Welcome to JoJo!</h1>
-				<img id="jojo-icon" src="images/jojo-icon.png">
+<!-- Div to hold the menu -->
+	{{#if currentUser}}
+		{{> main_off_canvas_menu}}
+	{{else}}
+		<div class="welcome-options-container">
+			<h1 class="dancing-script">Welcome to JoJo!</h1>
+			<img id="jojo-icon" src="images/jojo-icon.png">
 
-				{{>accordion_menu}}
-			</div>
-		{{/if}} 
+			{{>login_tabs}}
+			<button class="large button">About JoJo</button>
+			{{>about_jojo}}
+		</div>
+	{{/if}} 
 </template>
 
-<template name="accordion_menu">
-<!-- Accordion for Information -->
-			<dl class="accordion" data-accordion>
-				<dd class="accordion-navigation">
-					<a href="#information" class="button">About JoJo</a>
-					<!-- Panels explaining what jojo is -->
-					<div class="content" id="information">
-						<div class="row" data-equalizer>
-							<div class="small-12 medium-6 columns">
-								<div class="panel callout" data-equalizer-watch>
-									<h1 class="dancing-script">JoJo:</h1>
-									<p>Here to help you share your interests and organize your life.</p>
-									{{{jojoIcon}}}
-								</div>
-							</div>
-							<div class="small-12 medium-6 columns">
-								<div class="panel" data-equalizer-watch>
-									<h3 class="dancing-script">The Big Idea:</h3>
-									<p><span class="indie-flower">JoJo</span> is all about letting you decide what information you want. Take it with you, teach it tricks, and watch it grow.</p>
-								</div>
-							</div>
-						</div>
+<template name="login_tabs">
+<!-- Tabs for sign up and log in -->
+	<dl class="tabs" data-tab>
+		<dd class="active"><a href="#user-login-tab">Log In</a></dd>
+		<dd><a href="#sign-up-tab">Sign Up</a></dd>
+	</dl>
+<!-- Content for sign up and login -->
+	<div class="tabs-content">
+		<div class="content active" id="user-login-tab">
+			<form id="user-login-form">
+				<input required type="email" name="username" placeholder="Enter Username or E-mail">
+				<input required type="password" name="password" placeholder="Enter Password">
+			</form>
+		</div>
 
-						<div class="row" data-equalizer>
-							<div class="small-12 medium-6 columns">
-								<div class="panel" data-equalizer-watch>
-									<h1 class="dancing-script">So... what's a jojo?</h1>
-									<p>Think of it as a category or an interest. Like a contacts book, a list of great restaraunts, or characters in a book you're working on. The sky's the limit.</p>
-								</div>
-							</div>
-							<div class="small-12 medium-6 columns">
-								<div class="panel" data-equalizer-watch>
-									<h1 class="dancing-script">How do they work?</h1>
-									<p>Create a <span class="indie-flower">jojo</span>, tell it exactly what information you want and how you want to view it. Get the <span class="indie-flower">jojo</span> spinning by creating entries. Keep it private, share it with friends, or make it public!</p>
-								</div>
-							</div>
-						</div>
+		<div class="content" id="sign-up-tab">
+			<form id="create-account-form">
+				<input required type="email" name="username" placeholder="Enter E-mail Address">
+				<input required type="password" name="password" placeholder="Choose a password">
+				<input required type="password" name="confirm-password" placeholder="Confirm password">
+			</form>
+		</div>
+	</div>
+	<!-- <button>{{> loginButtons}}</button> -->
+</template>
 
-						<div class="row" data-equalizer>
-							<div class="small-12 medium-6 columns">
-								<div class="panel" data-equalizer-watch>
-									<h1 class="dancing-script">Can they do tricks?</h1>
-									<p>You bet! <span class="indie-flower">jojo</span>s are made to be easily grouped and searched. Even cooler, you can pin relevant information from one <span class="indie-flower">jojo</span> to entries in another! Now your appointment with your best friend at that new restaraunt can all be in one place.</p>
-								</div>
-							</div>
-							<div class="small-12 medium-6 columns">
-								<div class="panel" data-equalizer-watch>
-									<h1 class="dancing-script">Around the world.</h1>
-									<p><span class="indie-flower">JoJo</span> is designed for the modern world. It fits nicely in your pocket, and can do some really neat tricks when given room. No matter what, the information you need is there, at your fingertips.</p>
-								</div>
-							</div>
-						</div>
+<template name="about_jojo">
+	<div>
+		Coming soon!
+		<!-- Panels explaining what jojo is -->
+		<!-- <div class="tabs-content" id="information">
+			<div class="row" data-equalizer>
+				<div class="small-12 medium-6 columns">
+					<div class="panel callout" data-equalizer-watch>
+						<h1 class="dancing-script">JoJo:</h1>
+						<p>Here to help you share your interests and organize your life.</p>
+						{{{jojoIcon}}}
 					</div>
-				</dd>
-				<dd class="accordion-navigation">
-					<a href="#user-login-tab" class="button">Log In</a>
-					<div class="content" id="user-login-tab">
-						<form id="user-login-form">
-							<input required type="e-mail" name="username" placeholder="Enter Username or E-mail">
-							<input required type="password" name="password" placeholder="Enter Password">
-						</form>
+				</div>
+				<div class="small-12 medium-6 columns">
+					<div class="panel" data-equalizer-watch>
+						<h3 class="dancing-script">The Big Idea:</h3>
+						<p><span class="indie-flower">JoJo</span> is all about letting you decide what information you want. Take it with you, teach it tricks, and watch it grow.</p>
 					</div>
-				</dd>	
-				<dd class="accordion-navigation">
-					<a href="#create-account-tab" class="button">Create Account</a>
-					<div class="content" id="create-account-tab">
-						<form id="create-account-form">
-							<input required type="e-mail" name="username" placeholder="Enter E-mail Address">
-							<input required type="password" name="password" placeholder="Choose a password">
-							<input required type="password" name="confirm-password" placeholder="Confirm password">
-						</form>
+				</div>
+			</div>
+
+			<div class="row" data-equalizer>
+				<div class="small-12 medium-6 columns">
+					<div class="panel" data-equalizer-watch>
+						<h1 class="dancing-script">So... what's a jojo?</h1>
+						<p>Think of it as a category or an interest. Like a contacts book, a list of great restaraunts, or characters in a book you're working on. The sky's the limit.</p>
 					</div>
-				</dd>
-			</dl>
-			
-			<!-- <button>{{> loginButtons}}</button> -->
+				</div>
+				<div class="small-12 medium-6 columns">
+					<div class="panel" data-equalizer-watch>
+						<h1 class="dancing-script">How do they work?</h1>
+						<p>Create a <span class="indie-flower">jojo</span>, tell it exactly what information you want and how you want to view it. Get the <span class="indie-flower">jojo</span> spinning by creating entries. Keep it private, share it with friends, or make it public!</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="row" data-equalizer>
+				<div class="small-12 medium-6 columns">
+					<div class="panel" data-equalizer-watch>
+						<h1 class="dancing-script">Can they do tricks?</h1>
+						<p>You bet! <span class="indie-flower">jojo</span>s are made to be easily grouped and searched. Even cooler, you can pin relevant information from one <span class="indie-flower">jojo</span> to entries in another! Now your appointment with your best friend at that new restaraunt can all be in one place.</p>
+					</div>
+				</div>
+				<div class="small-12 medium-6 columns">
+					<div class="panel" data-equalizer-watch>
+						<h1 class="dancing-script">Around the world.</h1>
+						<p><span class="indie-flower">JoJo</span> is designed for the modern world. It fits nicely in your pocket, and can do some really neat tricks when given room. No matter what, the information you need is there, at your fingertips.</p>
+					</div>
+				</div>
+			</div>
+		</div> -->
+	</div>
 </template>
